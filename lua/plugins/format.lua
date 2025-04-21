@@ -1,3 +1,17 @@
+---@param bufnr integer
+---@param ... string
+---@return string
+local function first(bufnr, ...)
+  local conform = require 'conform'
+  for i = 1, select('#', ...) do
+    local formatter = select(i, ...)
+    if conform.get_formatter_info(formatter, bufnr).available then
+      return formatter
+    end
+  end
+  return select(1, ...)
+end
+
 return {
   { -- Autoformat
     'stevearc/conform.nvim',
@@ -30,12 +44,43 @@ return {
         end
       end,
       formatters_by_ft = {
+        css = { 'prettierd', 'prettier', stop_after_first = true },
+        scss = { 'prettierd', 'prettier', stop_after_first = true },
+        sass = { 'prettierd', 'prettier', stop_after_first = true },
+        graphql = function(bufnr)
+          return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
+        end,
+        html = { 'prettierd', 'prettier', stop_after_first = true },
+        javascript = function(bufnr)
+          return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
+        end,
+        javascriptreact = function(bufnr)
+          return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
+        end,
+        json = function(bufnr)
+          return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
+        end,
+        jsonc = function(bufnr)
+          return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
+        end,
+        markdown = function(bufnr)
+          return { first(bufnr, 'prettierd', 'prettier'), 'markdownlint' }
+        end,
+        svelte = function(bufnr)
+          return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
+        end,
+        typescript = function(bufnr)
+          return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
+        end,
+        typescriptreact = function(bufnr)
+          return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
+        end,
+        vue = function(bufnr)
+          return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
+        end,
+        xml = { 'prettierd', 'prettier', stop_after_first = true },
+        yaml = { 'prettierd', 'prettier', stop_after_first = true },
         lua = { 'stylua' },
-        -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
-        --
-        -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
       },
     },
     init = function()

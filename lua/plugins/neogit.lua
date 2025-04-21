@@ -8,13 +8,19 @@ return {
       -- Only one of these is needed, not both.
       'nvim-telescope/telescope.nvim', -- optional
     },
-    opts = {
-      graph_style = 'unicode',
-      integrations = {
-        diffview = true,
-        telescope = true,
-      },
-    },
+    opts = function()
+      dofile(vim.g.base46_cache .. 'git')
+      dofile(vim.g.base46_cache .. 'git-conflict')
+      dofile(vim.g.base46_cache .. 'neogit')
+
+      return {
+        graph_style = 'unicode',
+        integrations = {
+          diffview = true,
+          telescope = true,
+        },
+      }
+    end,
     keys = function()
       local neogit = require 'neogit'
       return {

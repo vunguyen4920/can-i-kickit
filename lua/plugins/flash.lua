@@ -3,16 +3,20 @@ return {
     'folke/flash.nvim',
     event = 'BufEnter',
     ---@type Flash.Config
-    opts = {
-      modes = {
-        search = {
-          enabled = true,
+    opts = function()
+      dofile(vim.g.base46_cache .. 'flash')
+
+      return {
+        modes = {
+          search = {
+            enabled = true,
+          },
+          char = {
+            jump_labels = true,
+          },
         },
-        char = {
-          jump_labels = true,
-        },
-      },
-    },
+      }
+    end,
     keys = function()
       local flash = require 'flash'
 

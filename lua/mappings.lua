@@ -48,3 +48,7 @@ map('n', '<leader>ft', ':echo &filetype<CR>', { desc = 'Show current filetype' }
 
 map('n', '<C-w>C', ":exe (v:count ? v:count : '') . 'tabclose'<CR>", { desc = '[C]lose current tab' })
 map('n', '<C-w>O', ":exe (v:count ? v:count : '') . 'tabonly'<CR>", { desc = 'Keep [O]nly other tab' })
+
+-- Set column numbers
+map('n', '<leader>n', '<cmd>set nu!<CR>', { desc = 'toggle line number' })
+map('n', '<leader>rn', '<cmd>set rnu!<CR>', { desc = 'toggle relative number' })

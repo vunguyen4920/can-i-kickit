@@ -2,7 +2,9 @@ return {
   {
     'MagicDuck/grug-far.nvim',
     umd = { 'GrugFar', 'GrugBarWithin' },
-    opts = {},
+    opts = function()
+      dofile(vim.g.base46_cache .. 'grug_far')
+    end,
     keys = function()
       local grug = require 'grug-far'
 

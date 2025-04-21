@@ -190,9 +190,19 @@ return {
       }
 
       local ensure_installed = vim.tbl_keys(servers or {})
+
       vim.list_extend(ensure_installed, {
+        -- formatters
         'stylua', -- Used to format Lua code
+        'prettierd',
+        'prettier',
+        'eslint_d',
+
+        -- linters
+        'markdownlint',
+        'selene',
       })
+
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       -- Handle LSP setups
@@ -216,6 +226,9 @@ return {
       --   vim.lsp.config(server, config)
       --   vim.lsp.enable(server)
       -- end
+
+      dofile(vim.g.base46_cache .. 'lsp')
+      dofile(vim.g.base46_cache .. 'semantic_tokens')
     end,
   },
   {

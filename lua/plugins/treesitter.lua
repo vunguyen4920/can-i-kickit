@@ -13,6 +13,10 @@ return {
       },
       indent = { enable = true, disable = { 'ruby' } },
     },
+    config = function()
+      dofile(vim.g.base46_cache .. 'syntax')
+      dofile(vim.g.base46_cache .. 'treesitter')
+    end,
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:
     --

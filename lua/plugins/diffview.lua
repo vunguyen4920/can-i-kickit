@@ -3,9 +3,13 @@ return {
     'sindrets/diffview.nvim',
     event = 'BufReadPost',
     cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },
-    opts = {
-      enhanced_diff_hl = true,
-    },
+    opts = function()
+      dofile(vim.g.base46_cache .. 'diffview')
+
+      return {
+        enhanced_diff_hl = true,
+      }
+    end,
     keys = {
       {
         '<leader>gh',

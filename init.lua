@@ -21,6 +21,7 @@
 --]]
 
 vim.loader.enable()
+vim.g.base46_cache = vim.fn.stdpath 'data' .. '/base46_cache/'
 
 require 'autocmds'
 require 'options'
@@ -44,6 +45,7 @@ require('lazy').setup({
   { import = 'plugins' },
 }, {
   defaults = { lazy = true },
+  install = { colorscheme = { 'nvchad' } },
   ui = {
     icons = vim.g.have_nerd_font and {} or {
       cmd = '⌘',
@@ -90,4 +92,5 @@ require('lazy').setup({
       },
     },
   },
+  change_detection = { notify = false },
 })
