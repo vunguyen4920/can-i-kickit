@@ -219,11 +219,36 @@ return {
     end,
   },
   {
+    'aznhe21/actions-preview.nvim',
+    keys = {
+      {
+        mode = { 'n', 'v' },
+        'gap',
+        function()
+          require('actions-preview').code_actions()
+        end,
+        desc = '[G]oto Code [A]ctions [P]reviews',
+      },
+    },
+    config = function()
+      require('actions-preview').setup {
+        telescope = {
+          sorting_strategy = 'ascending',
+          layout_strategy = 'vertical',
+          layout_config = {
+            width = 0.9,
+            height = 0.9,
+            prompt_position = 'bottom',
+            preview_cutoff = 10,
+          },
+        },
+      }
+    end,
+  },
+  {
     'zeioth/garbage-day.nvim',
     dependencies = 'neovim/nvim-lspconfig',
     event = 'LspAttach',
     opts = {},
   },
-  { 'kevinhwang91/nvim-bqf', ft = 'qf' },
-  { 'yorickpeterse/nvim-pqf', ft = 'qf' },
 }
