@@ -14,7 +14,11 @@ return {
     'williamboman/mason.nvim',
     cmd = { 'Mason', 'MasonInstall', 'MasonUpdate' },
     build = ':MasonUpdate',
-    opts = {},
+    opts = function()
+      dofile(vim.g.base46_cache .. 'mason')
+
+      return {}
+    end,
   },
   {
     -- Main LSP Configuration
@@ -138,9 +142,9 @@ return {
             [vim.diagnostic.severity.HINT] = '󰌶 ',
           },
         } or {},
-        virtual_text = {
-          source = 'if_many',
-          spacing = 2,
+        virtual_text = false,
+        virtual_lines = {
+          current_line = true,
           format = function(diagnostic)
             local diagnostic_message = {
               [vim.diagnostic.severity.ERROR] = diagnostic.message,
