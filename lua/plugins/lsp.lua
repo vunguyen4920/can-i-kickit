@@ -153,6 +153,10 @@ return {
         },
       }
 
+      local mason_registry = require 'mason-registry'
+      local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server'
+      vim.notify(vim.inspect(vue_language_server_path), nil, { title = '🚀 vue_language_server_path', ft = 'lua' })
+
       --  Available keys are:
       --  - cmd (table): Override the default command used to start the server
       --  - filetypes (table): Override the default list of associated filetypes for the server
@@ -160,30 +164,122 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- clangd = {},
-        -- gopls = {},
-        -- pyright = {},
-        -- rust_analyzer = {},
-        -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-        --
-        -- Some languages (like typescript) have entire language plugins that can be useful:
-        --    https://github.com/pmizio/typescript-tools.nvim
-        --
-        -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
-        --
-
         lua_ls = {
-          -- cmd = { ... },
-          -- filetypes = { ... },
-          -- capabilities = {},
           settings = {
             Lua = {
+              hint = {
+                enable = true,
+              },
               completion = {
                 callSnippet = 'Replace',
               },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
+              diagnostics = {
+                globals = { 'vim' },
+              },
+              workspace = {
+                library = {
+                  vim.fn.expand '$VIMRUNTIME/lua',
+                  vim.fn.expand '$VIMRUNTIME/lua/vim/lsp',
+                  vim.fn.stdpath 'data' .. '/lazy/ui/nvchad_types',
+                  vim.fn.stdpath 'data' .. '/lazy/lazy.nvim/lua/lazy',
+                  '${3rd}/luv/library',
+                },
+                maxPreload = 100000,
+                preloadFileSize = 10000,
+              },
+            },
+          },
+        },
+        astro = {},
+        css_variables = {},
+        cssls = {},
+        cssmodules_ls = {},
+        dockerls = {},
+        emmet_ls = {},
+        eslint = {
+          settings = {
+            workingDirectories = { mode = 'auto' },
+          },
+        },
+        graphql = {},
+        html = {},
+        jsonls = {
+          settings = {
+            json = {
+              schemas = require('schemastore').json.schemas(),
+              validate = { enable = true },
+            },
+          },
+        },
+        lemminx = {},
+        marksman = {},
+        mdx_analyzer = {},
+        prismals = {},
+        somesass_ls = {},
+        svelte = {},
+        tailwindcss = {},
+        taplo = {},
+        ts_ls = {
+          init_options = {
+            plugins = {
+              {
+                name = '@vue/typescript-plugin',
+                location = vue_language_server_path,
+                languages = { 'javascript', 'typescript', 'vue' },
+                configNamespace = 'typescript',
+                enableForWorkspaceTypeScriptVersions = true,
+              },
+              {
+                name = 'typescript-svelte-plugin',
+                enabled = true,
+                languages = { 'svelte' },
+                configNamespace = 'typescript',
+                enableForWorkspaceTypeScriptVersions = true,
+                assumeIsSvelteProject = false,
+              },
+            },
+            preferences = {
+              inlayHints = {
+                includeInlayParameterNameHints = 'all',
+                includeInlayVariableTypeHints = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+                includeInlayFunctionParameterTypeHints = true,
+              },
+            },
+            completions = {
+              completeFunctionCalls = true,
+            },
+          },
+          filetypes = {
+            'javascript',
+            'javascriptreact',
+            'javascript.jsx',
+            'typescript',
+            'typescriptreact',
+            'typescript.jsx',
+            'vue',
+          },
+        },
+        volar = { -- vue >= 2.7 & vue >= 3.0
+          init_options = {
+            vue = {
+              hybridMode = false,
+            },
+          },
+        },
+        yamlls = {
+          settings = {
+            yaml = {
+              schemaStore = {
+                -- You must disable built-in schemaStore support if you want to use
+                -- this plugin and its advanced options like `ignore`.
+                enable = false,
+                -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+                url = '',
+              },
+              schemas = require('schemastore').yaml.schemas(),
             },
           },
         },
