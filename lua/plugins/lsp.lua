@@ -157,9 +157,9 @@ return {
         },
       }
 
-      local mason_registry = require 'mason-registry'
-      local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server'
-      vim.notify(vim.inspect(vue_language_server_path), nil, { title = '🚀 vue_language_server_path', ft = 'lua' })
+      local vue_typescript_plugin = require('mason-registry').get_package('vue-language-server'):get_install_path()
+        .. '/node_modules/@vue/language-server'
+        .. '/node_modules/@vue/typescript-plugin'
 
       --  Available keys are:
       --  - cmd (table): Override the default command used to start the server
@@ -182,11 +182,7 @@ return {
               },
               workspace = {
                 library = {
-                  vim.fn.expand '$VIMRUNTIME/lua',
-                  vim.fn.expand '$VIMRUNTIME/lua/vim/lsp',
-                  vim.fn.stdpath 'data' .. '/lazy/ui/nvchad_types',
-                  vim.fn.stdpath 'data' .. '/lazy/lazy.nvim/lua/lazy',
-                  '${3rd}/luv/library',
+                  vim.env.VIMRUNTIME,
                 },
                 maxPreload = 100000,
                 preloadFileSize = 10000,
@@ -228,32 +224,9 @@ return {
             plugins = {
               {
                 name = '@vue/typescript-plugin',
-                location = vue_language_server_path,
+                location = vue_typescript_plugin,
                 languages = { 'javascript', 'typescript', 'vue' },
-                configNamespace = 'typescript',
-                enableForWorkspaceTypeScriptVersions = true,
               },
-              {
-                name = 'typescript-svelte-plugin',
-                enabled = true,
-                languages = { 'svelte' },
-                configNamespace = 'typescript',
-                enableForWorkspaceTypeScriptVersions = true,
-                assumeIsSvelteProject = false,
-              },
-            },
-            preferences = {
-              inlayHints = {
-                includeInlayParameterNameHints = 'all',
-                includeInlayVariableTypeHints = true,
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayEnumMemberValueHints = true,
-                includeInlayFunctionParameterTypeHints = true,
-              },
-            },
-            completions = {
-              completeFunctionCalls = true,
             },
           },
           filetypes = {
@@ -262,17 +235,11 @@ return {
             'javascript.jsx',
             'typescript',
             'typescriptreact',
-            'typescript.jsx',
+            'typescript.tsx',
             'vue',
           },
         },
-        volar = { -- vue >= 2.7 & vue >= 3.0
-          init_options = {
-            vue = {
-              hybridMode = false,
-            },
-          },
-        },
+        volar = {},
         yamlls = {
           settings = {
             yaml = {
