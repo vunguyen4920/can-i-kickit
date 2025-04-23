@@ -8,10 +8,10 @@ return {
       require('mini.ai').setup {
         n_lines = 500,
         custom_textobjects = {
-          c = gen_spec.treesitter { a = '@class.outer', i = '@class.inner' },
 
           -- Function definition (needs treesitter queries with these captures)
-          F = gen_spec.treesitter { a = '@function.outer', i = '@function.inner' },
+          c = gen_spec.treesitter { a = '@class.outer', i = '@class.inner' },
+          f = gen_spec.treesitter { a = '@function.outer', i = '@function.inner' },
 
           o = gen_spec.treesitter {
             a = { '@conditional.outer', '@loop.outer' },
