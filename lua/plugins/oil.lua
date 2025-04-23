@@ -47,6 +47,10 @@ return {
         winbar = '%!v:lua.get_oil_winbar()',
       },
       keymaps = {
+        ['q'] = {
+          desc = 'Close oil and restore original buffer',
+          callback = 'actions.close',
+        },
         ['gY'] = {
           desc = 'Yank absolute path to clipboard',
           callback = 'actions.copy_entry_path',
@@ -69,17 +73,17 @@ return {
             vim.notify('Copied relative path: ' .. rel_path, vim.log.levels.INFO)
           end,
         },
-      },
-      ['gd'] = {
-        desc = 'Toggle file detail view',
-        callback = function()
-          detail = not detail
-          if detail then
-            require('oil').set_columns { 'icon', 'permissions', 'size', 'mtime' }
-          else
-            require('oil').set_columns { 'icon' }
-          end
-        end,
+        ['gd'] = {
+          desc = 'Toggle file detail view',
+          callback = function()
+            detail = not detail
+            if detail then
+              require('oil').set_columns { 'icon', 'permissions', 'size', 'mtime' }
+            else
+              require('oil').set_columns { 'icon' }
+            end
+          end,
+        },
       },
     },
   },
