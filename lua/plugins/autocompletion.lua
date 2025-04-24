@@ -18,9 +18,6 @@ return {
           return 'make install_jsregexp'
         end)(),
         dependencies = {
-          -- `friendly-snippets` contains a variety of premade snippets.
-          --    See the README about individual language/framework/plugin snippets:
-          --    https://github.com/rafamadriz/friendly-snippets
           {
             'rafamadriz/friendly-snippets',
             config = function()
@@ -52,6 +49,12 @@ return {
         end,
       },
       'folke/lazydev.nvim',
+      'Kaiser-Yang/blink-cmp-avante',
+      {
+        'saghen/blink.compat',
+        version = '*',
+        opts = {},
+      },
     },
     --- @module 'blink.cmp'
     --- @type function|blink.cmp.Config
@@ -73,9 +76,16 @@ return {
           documentation = { auto_show = false, auto_show_delay_ms = 500 },
         },
         sources = {
-          default = { 'lsp', 'path', 'snippets', 'lazydev' },
+          default = { 'avante', 'lsp', 'path', 'snippets', 'lazydev', 'buffer' },
           providers = {
             lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+            avante = {
+              module = 'blink-cmp-avante',
+              name = 'Avante',
+              opts = {
+                -- options for blink-cmp-avante
+              },
+            },
           },
         },
         snippets = { preset = 'luasnip' },

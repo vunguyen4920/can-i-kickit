@@ -85,3 +85,5 @@ o.wrap = false
 o.colorcolumn = '80'
 
 o.termguicolors = true
+
+o.laststatus = 3

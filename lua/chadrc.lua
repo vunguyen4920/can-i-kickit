@@ -5,15 +5,18 @@ M.base46 = {
   theme = 'tokyodark',
 
   integrations = {
+    'avante',
     'blink',
     'dap',
     'devicons',
     'diffview',
     'flash',
+    'git',
     'git-conflict',
     'grug_far',
     'lsp',
     'neogit',
+    'nvshades',
     'rainbowdelimiters',
     'semantic_tokens',
     'syntax',
