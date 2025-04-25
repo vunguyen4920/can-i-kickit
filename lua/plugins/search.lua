@@ -4,6 +4,12 @@ return {
     umd = { 'GrugFar', 'GrugBarWithin' },
     opts = function()
       dofile(vim.g.base46_cache .. 'grug_far')
+
+      return {
+        keymaps = {
+          close = { n = 'q' },
+        },
+      }
     end,
     keys = function()
       local grug = require 'grug-far'
