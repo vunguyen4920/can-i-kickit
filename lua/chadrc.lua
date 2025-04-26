@@ -21,6 +21,7 @@ M.base46 = {
     'semantic_tokens',
     'syntax',
     'telescope',
+    'tiny-inline-diagnostic',
     'treesitter',
     'trouble',
   },

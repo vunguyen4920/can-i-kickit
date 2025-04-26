@@ -143,7 +143,8 @@ return {
           },
         } or {},
         virtual_text = false,
-        virtual_lines = {
+        virtual_lines = false,
+        --[[ virtual_lines = {
           current_line = true,
           format = function(diagnostic)
             local diagnostic_message = {
@@ -154,7 +155,7 @@ return {
             }
             return diagnostic_message[diagnostic.severity]
           end,
-        },
+        }, ]]
       }
 
       local vue_typescript_plugin = require('mason-registry').get_package('vue-language-server'):get_install_path()
@@ -296,6 +297,15 @@ return {
 
       dofile(vim.g.base46_cache .. 'lsp')
       dofile(vim.g.base46_cache .. 'semantic_tokens')
+    end,
+  },
+  {
+    'rachartier/tiny-inline-diagnostic.nvim',
+    event = 'LspAttach', -- Or `LspAttach`
+    priority = 1000, -- needs to be loaded in first
+    opts = function()
+      dofile(vim.g.base46_cache .. 'tiny-inline-diagnostic')
+      return {}
     end,
   },
   {
