@@ -1,6 +1,7 @@
 return {
   {
     'zbirenbaum/copilot.lua',
+    enabled = true,
     cmd = { 'Copilot' },
     build = ':Copilot auth',
     event = 'InsertEnter',
@@ -17,10 +18,16 @@ return {
       return {
         provider = 'copilot',
         auto_suggestions_provider = 'copilot',
-        suggestion = {
-          debounce = 800,
-          throttle = 800,
-        },
+        --[[ provider = 'openrouter',
+        auto_suggestions_provider = 'openrouter',
+        vendors = {
+          openrouter = {
+            __inherited_from = 'openai',
+            endpoint = 'https://openrouter.ai/api/v1',
+            api_key_name = 'OPENROUTER_API_KEY',
+            model = 'google/gemini-2.0-flash-exp:free',
+          },
+        }, ]]
       }
     end,
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`

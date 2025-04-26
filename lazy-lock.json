@@ -35,6 +35,7 @@
   "mason.nvim": { "branch": "main", "commit": "fc98833b6da5de5a9c5b1446ac541577059555be" },
   "mdx.nvim": { "branch": "main", "commit": "464a74be368dce212cff02f6305845dc7f209ab3" },
   "mini.nvim": { "branch": "main", "commit": "05975f387906211745d0aaf996eb7ad3c91b193d" },
+  "modes.nvim": { "branch": "main", "commit": "2cd194d1033ba391d87d386735e15963adbc5f51" },
   "neogit": { "branch": "master", "commit": "9bb1e73c534f767607e0a888f3de4c942825c501" },
   "neominimap.nvim": { "branch": "main", "commit": "f9a94ce397838d09fb4c56701a9f292473007e10" },
   "nui.nvim": { "branch": "main", "commit": "8d5b0b568517935d3c84f257f272ef004d9f5a59" },

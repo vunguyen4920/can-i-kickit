@@ -1,6 +1,8 @@
 return {
   {
     'echasnovski/mini.nvim',
+    priority = 1000,
+    lazy = false,
     config = function()
       require('mini.move').setup()
 
