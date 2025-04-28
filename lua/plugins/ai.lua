@@ -37,6 +37,8 @@ return {
           }
         end,
         disabled_tools = {
+          'git_diff',
+          'git_commit',
           'list_files',
           'search_files',
           'read_file',
