@@ -1,13 +1,5 @@
 return {
   {
-    'zbirenbaum/copilot.lua',
-    enabled = true,
-    cmd = { 'Copilot' },
-    build = ':Copilot auth',
-    event = 'InsertEnter',
-    opts = {},
-  },
-  {
     'yetone/avante.nvim',
     enabled = true,
     event = 'VeryLazy',
@@ -16,10 +8,7 @@ return {
       dofile(vim.g.base46_cache .. 'avante')
 
       return {
-        provider = 'copilot',
-        auto_suggestions_provider = 'copilot',
-        --[[ provider = 'openrouter',
-        auto_suggestions_provider = 'openrouter',
+        provider = 'openrouter',
         vendors = {
           openrouter = {
             __inherited_from = 'openai',
@@ -27,7 +16,7 @@ return {
             api_key_name = 'OPENROUTER_API_KEY',
             model = 'google/gemini-2.0-flash-exp:free',
           },
-        }, ]]
+        },
       }
     end,
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
@@ -55,6 +44,52 @@ return {
             },
             -- required for Windows users
             use_absolute_path = true,
+          },
+        },
+      },
+    },
+  },
+  {
+    'milanglacier/minuet-ai.nvim',
+    enabled = true,
+    event = 'BufReadPre',
+    opts = {
+      provider = 'codestral',
+      notify = 'debug',
+      n_completions = 1,
+      add_single_line_entry = false,
+      lsp = {
+        enabled_ft = { '*' },
+      },
+      virtualtext = {
+        auto_trigger_ft = {
+          'lua',
+          'javascript',
+          'typescript',
+          'javascriptreact',
+          'typescriptreact',
+          'vue',
+          'svelte',
+        },
+        keymap = {
+          -- accept whole completion
+          accept = '<Tab>',
+          -- accept one line
+          accept_line = '<A-a>',
+          -- accept n lines (prompts for number)
+          accept_n_lines = '<A-z>',
+          -- Cycle to prev completion item, or manually invoke completion
+          prev = '<A-[>',
+          -- Cycle to next completion item, or manually invoke completion
+          next = '<A-]>',
+          dismiss = '<A-e>',
+        },
+      },
+      provider_options = {
+        codestral = {
+          optional = {
+            max_tokens = 256,
+            stop = { '\n\n' },
           },
         },
       },
