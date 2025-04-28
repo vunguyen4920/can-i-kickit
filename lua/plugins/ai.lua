@@ -1,5 +1,13 @@
 return {
   {
+    'zbirenbaum/copilot.lua',
+    enabled = true,
+    cmd = { 'Copilot' },
+    build = ':Copilot auth',
+    event = 'InsertEnter',
+    opts = {},
+  },
+  {
     'yetone/avante.nvim',
     enabled = true,
     event = 'VeryLazy',
@@ -8,14 +16,37 @@ return {
       dofile(vim.g.base46_cache .. 'avante')
 
       return {
-        provider = 'openrouter',
+        provider = 'copilot',
+        --[[ provider = 'openrouter',
         vendors = {
           openrouter = {
             __inherited_from = 'openai',
             endpoint = 'https://openrouter.ai/api/v1',
             api_key_name = 'OPENROUTER_API_KEY',
-            model = 'google/gemini-2.0-flash-exp:free',
+            model = 'openai/gpt-4o-mini',
           },
+        }, ]]
+        system_prompt = function()
+          local hub = require('mcphub').get_hub_instance()
+
+          return hub:get_active_servers_prompt()
+        end,
+        custom_tools = function()
+          return {
+            require('mcphub.extensions.avante').mcp_tool(),
+          }
+        end,
+        disabled_tools = {
+          'list_files',
+          'search_files',
+          'read_file',
+          'create_file',
+          'rename_file',
+          'delete_file',
+          'create_dir',
+          'rename_dir',
+          'delete_dir',
+          'bash',
         },
       }
     end,
@@ -58,9 +89,6 @@ return {
       notify = 'debug',
       n_completions = 1,
       add_single_line_entry = false,
-      lsp = {
-        enabled_ft = { '*' },
-      },
       virtualtext = {
         auto_trigger_ft = {
           'lua',
@@ -71,18 +99,14 @@ return {
           'vue',
           'svelte',
         },
+        auto_trigger_ignore_ft = { 'oil', 'AvanteInput' },
         keymap = {
-          -- accept whole completion
-          accept = '<Tab>',
-          -- accept one line
-          accept_line = '<A-a>',
-          -- accept n lines (prompts for number)
-          accept_n_lines = '<A-z>',
-          -- Cycle to prev completion item, or manually invoke completion
-          prev = '<A-[>',
-          -- Cycle to next completion item, or manually invoke completion
-          next = '<A-]>',
-          dismiss = '<A-e>',
+          accept = '<Tab>', -- Accept whole completion
+          accept_line = '<A-a>', -- Accept one line
+          accept_n_lines = '<A-z>', -- Accept n lines (prompts for number)
+          prev = '<A-[>', -- Cycle to previous completion item
+          next = '<A-]>', -- Cycle to next completion item
+          dismiss = '<A-e>', -- Dismiss virtual text
         },
       },
       provider_options = {
@@ -93,6 +117,25 @@ return {
           },
         },
       },
+    },
+  },
+  {
+    'ravitemer/mcphub.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim', -- Required for Job and HTTP requests
+    },
+    event = 'VeryLazy',
+    build = 'bundled_build.lua',
+    opts = {
+      use_bundled_binary = true, -- Use the bundled binary instead of the global one
+      extensions = {
+        avante = {
+          make_slash_commands = true, -- make /slash commands from MCP server prompts
+        },
+      },
+    },
+    keys = {
+      { '<leader>mcp', '<cmd>MCPHub<cr>', desc = 'MCPHub' },
     },
   },
 }

@@ -12,11 +12,9 @@ local ignored_filetypes = {
   ['grug-far-help'] = true,
   ['NeogitPopup'] = true,
   ['NeogitStatus'] = true,
-  ['Outline'] = true,
   ['Avante'] = true,
   ['AvanteInput'] = true,
   ['AvanteSelectedFiles'] = true,
-  ['nvdash'] = true,
 }
 
 return {
