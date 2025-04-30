@@ -199,7 +199,9 @@ return {
         emmet_ls = {},
         eslint = {
           settings = {
-            workingDirectories = { mode = 'auto' },
+            experimental = {
+              useFlatConfig = true,
+            },
           },
         },
         graphql = {},
