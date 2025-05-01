@@ -53,7 +53,7 @@ return {
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
       vim.keymap.set(
         'n',
-        '<leader>hsf',
+        '<leader>shf',
         "<cmd>lua require('telescope.builtin').find_files({hidden = true,no_ignore = true, no_ignore_parent = true})<cr>",
         { desc = '[H]idden [S]earch by [F]iles' }
       )
@@ -62,7 +62,7 @@ return {
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
       vim.keymap.set(
         'n',
-        '<leader>hsg',
+        '<leader>shg',
         "<cmd>lua require('telescope.builtin').live_grep({additional_args = {'--hidden'}})<cr>",
         { desc = '[H]idden [S]earch by [G]rep' }
       )

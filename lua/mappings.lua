@@ -1,6 +1,6 @@
 local map = vim.keymap.set
 
-map('n', '<leader>zz', '<cmd>LspRestart<CR>', { desc = 'Hey, Sleep [zz]zzzz, wake up' })
+map('n', '<leader>zz', '<cmd>LspRestart<CR>', { desc = '[Zz]zzzz, wake up, wake up' })
 
 -- mark then join then back to the mark
 map('n', 'J', 'mzJ`z')

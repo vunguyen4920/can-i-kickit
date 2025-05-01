@@ -14,7 +14,7 @@ return {
         desc = 'Trouble Diagnostics Open',
       },
       {
-        '<leader>tD',
+        '<leader>tbd',
         '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
         desc = 'Trouble Diagnostics Current Buf Open',
       },
