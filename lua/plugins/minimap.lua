@@ -20,7 +20,7 @@ return {
       }
     end,
     keys = function()
-      local neominimap = require 'neominimap'
+      local neominimap = require 'neominimap.api'
       return {
         {
           mode = { 'n' },

@@ -3,7 +3,7 @@
 --
 -- See the kickstart.nvim README for more information
 return {
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  { 'tpope/vim-sleuth', event = 'BufEnter' }, -- Detect tabstop and shiftwidth automatically
   { -- Highlight todo, notes, etc in comments
     'folke/todo-comments.nvim',
     event = 'VimEnter',

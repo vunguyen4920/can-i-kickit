@@ -5,6 +5,7 @@ return {
     lazy = false,
     config = function()
       require('mini.move').setup()
+      require('mini.splitjoin').setup()
 
       local gen_spec = require('mini.ai').gen_spec
       require('mini.ai').setup {
