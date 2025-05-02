@@ -10,14 +10,28 @@ return {
       dashboard = {
         enable = true,
         sections = {
-          { section = 'terminal', cmd = 'fortune -s | cowsay | lolcat', hl = 'header', padding = 1, indent = 8, height = 12 },
-          { section = 'keys', gap = 1, padding = 1 },
-          { section = 'startup' },
           {
             section = 'terminal',
-            cmd = 'krabby random; sleep .1',
-            random = 10,
+            pane = 1,
+            cmd = 'tock -m -c; sleep .1',
+            hl = 'header',
+            padding = 0,
+            height = 25,
+          },
+          {
+            section = 'terminal',
             pane = 2,
+            cmd = "curl 'wttr.in/?0qFp&lang=vi'; sleep .1",
+            hl = 'header',
+            indent = 12,
+          },
+          { section = 'keys', pane = 2, gap = 1, padding = 1 },
+          { section = 'startup', pane = 2 },
+          {
+            section = 'terminal',
+            cmd = 'kingler random -iu --stats; sleep .1',
+            random = 10,
+            pane = 3,
             indent = 4,
             height = 30,
           },
