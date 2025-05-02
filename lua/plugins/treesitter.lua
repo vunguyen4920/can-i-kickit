@@ -30,6 +30,7 @@ return {
           'luadoc',
           'markdown',
           'markdown_inline',
+          'norg',
           'prisma',
           'query',
           'regex',
