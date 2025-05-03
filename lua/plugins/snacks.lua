@@ -16,15 +16,15 @@ return {
             cmd = 'tock -m -c; sleep .1',
             hl = 'header',
             padding = 0,
-            height = 25,
           },
           {
             section = 'terminal',
-            pane = 2,
-            cmd = "curl 'wttr.in/?0qFp&lang=vi'; sleep .1",
+            pane = 1,
+            cmd = "curl 'wttr.in/?0QFp&lang=vi'; sleep .1",
             hl = 'header',
             indent = 12,
           },
+          { section = 'header', pane = 2, gap = 1, padding = 1 },
           { section = 'keys', pane = 2, gap = 1, padding = 1 },
           { section = 'startup', pane = 2 },
           {
@@ -48,15 +48,24 @@ return {
     init = function()
       local prev = { new_name = '', old_name = '' } -- Prevents duplicate events
       vim.api.nvim_create_autocmd('User', {
-        pattern = 'NvimTreeSetup',
-        callback = function()
-          local events = require('nvim-tree.api').events
-          events.subscribe(events.Event.NodeRenamed, function(data)
-            if prev.new_name ~= data.new_name or prev.old_name ~= data.old_name then
-              data = data
-              require('snacks').rename.on_rename_file(data.old_name, data.new_name)
-            end
-          end)
+        pattern = 'OilActionsPost',
+        callback = function(event)
+          if event.data.actions.type == 'move' then
+            Snacks.rename.on_rename_file(event.data.actions.src_url, event.data.actions.dest_url)
+          end
+        end,
+      })
+
+      vim.api.nvim_create_autocmd('BufDelete', {
+        group = vim.api.nvim_create_augroup('dashboard_on_empty', { clear = true }),
+        callback = function(args)
+          local deleted_name = vim.api.nvim_buf_get_name(args.buf)
+          local deleted_ft = vim.api.nvim_get_option_value('filetype', { buf = args.buf })
+          local dashboard_on_empty = (deleted_name == '' and deleted_ft == '')
+            or (vim.api.nvim_buf_get_name(0) == '' and vim.api.nvim_get_option_value('filetype', { buf = 0 }) == '')
+          if dashboard_on_empty then
+            Snacks.dashboard { win = 0 }
+          end
         end,
       })
     end,
