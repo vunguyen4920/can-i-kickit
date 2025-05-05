@@ -48,7 +48,7 @@ o.smartcase = true
 o.signcolumn = 'yes'
 
 -- Decrease update time
-o.updatetime = 250
+o.updatetime = 100
 
 -- Decrease mapped sequence wait time
 o.timeoutlen = 300

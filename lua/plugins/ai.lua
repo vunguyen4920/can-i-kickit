@@ -1,3 +1,4 @@
+-- TODO: mcp is not working as expected
 return {
   {
     'zbirenbaum/copilot.lua',
@@ -8,76 +9,64 @@ return {
     opts = {},
   },
   {
-    'yetone/avante.nvim',
-    enabled = true,
-    event = 'VeryLazy',
-    version = false, -- Never set this value to "*"! Never!
+    'olimorris/codecompanion.nvim',
+    cmd = { 'CodeCompanionChat', 'CodeCompanion', 'CodeCompanionActions' },
     opts = function()
-      dofile(vim.g.base46_cache .. 'avante')
-
-      return {
-        provider = 'copilot',
-        --[[ provider = 'openrouter',
-        vendors = {
-          openrouter = {
+      --[[ openrouter = {
             __inherited_from = 'openai',
             endpoint = 'https://openrouter.ai/api/v1',
             api_key_name = 'OPENROUTER_API_KEY',
             model = 'openai/gpt-4o-mini',
-          },
-        }, ]]
-        system_prompt = function()
-          local hub = require('mcphub').get_hub_instance()
+      } ]]
 
-          return hub:get_active_servers_prompt()
-        end,
-        custom_tools = function()
-          return {
-            require('mcphub.extensions.avante').mcp_tool(),
-          }
-        end,
-        disabled_tools = {
-          'git_diff',
-          'git_commit',
-          'list_files',
-          'search_files',
-          'read_file',
-          'create_file',
-          'rename_file',
-          'delete_file',
-          'create_dir',
-          'rename_dir',
-          'delete_dir',
-          'bash',
+      -- Expand 'cc' into 'CodeCompanion' in the command line
+      vim.cmd [[cab cc CodeCompanion]]
+
+      return {
+        extensions = {
+          mcphub = {
+            callback = 'mcphub.extensions.codecompanion',
+            opts = {
+              make_vars = true,
+              make_slash_commands = true,
+              show_result_in_chat = true,
+            },
+          },
+        },
+        strategies = {
+          chat = {
+            keymaps = {
+              close = {
+                modes = { n = 'q', i = '<C-c>' },
+              },
+              stop = {
+                modes = { n = 's' },
+              },
+            },
+          },
         },
       }
     end,
-    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    build = 'make',
-    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+    keys = {
+      { '<leader>ac', '<cmd>CodeCompanionActions<cr>', desc = 'AI [C]ode Actions', mode = { 'n', 'v' } },
+      { '<leader>at', '<cmd>CodeCompanionChat Toggle<cr>', desc = 'AI [T]oggle', mode = { 'n', 'v' } },
+      { '<leader>aa', '<cmd>CodeCompanionChat Add<cr>', desc = 'AI [A]dd to Chat', mode = { 'v' } },
+    },
     dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      'stevearc/dressing.nvim',
       'nvim-lua/plenary.nvim',
-      'MunifTanjim/nui.nvim',
-      --- The below dependencies are optional,
-      'nvim-telescope/telescope.nvim', -- for file_selector provider telescope
-      'nvim-tree/nvim-web-devicons', -- or echasnovski/mini.icons
+      'nvim-treesitter/nvim-treesitter',
       {
-        -- support for image pasting
-        'HakonHarnes/img-clip.nvim',
+        'ravitemer/mcphub.nvim',
+        dependencies = {
+          'nvim-lua/plenary.nvim', -- Required for Job and HTTP requests
+        },
         event = 'VeryLazy',
+        build = 'bundled_build.lua',
         opts = {
-          -- recommended settings
-          default = {
-            embed_image_as_base64 = false,
-            prompt_for_file_name = false,
-            drag_and_drop = {
-              insert_mode = true,
-            },
-            -- required for Windows users
-            use_absolute_path = true,
-          },
+          use_bundled_binary = true, -- Use the bundled binary instead of the global one
+        },
+        keys = {
+          { '<leader>mcp', '<cmd>MCPHub<cr>', desc = '[MCP]Hub' },
         },
       },
     },
@@ -101,7 +90,7 @@ return {
           'vue',
           'svelte',
         },
-        auto_trigger_ignore_ft = { 'oil', 'AvanteInput' },
+        auto_trigger_ignore_ft = { 'oil', 'codecompanion' },
         keymap = {
           accept = '<Tab>', -- Accept whole completion
           accept_line = '<A-a>', -- Accept one line
@@ -119,25 +108,6 @@ return {
           },
         },
       },
-    },
-  },
-  {
-    'ravitemer/mcphub.nvim',
-    dependencies = {
-      'nvim-lua/plenary.nvim', -- Required for Job and HTTP requests
-    },
-    event = 'VeryLazy',
-    build = 'bundled_build.lua',
-    opts = {
-      use_bundled_binary = true, -- Use the bundled binary instead of the global one
-      extensions = {
-        avante = {
-          make_slash_commands = true, -- make /slash commands from MCP server prompts
-        },
-      },
-    },
-    keys = {
-      { '<leader>mcp', '<cmd>MCPHub<cr>', desc = 'MCPHub' },
     },
   },
 }

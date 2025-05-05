@@ -5,7 +5,6 @@ M.base46 = {
   theme = 'tokyodark',
 
   integrations = {
-    'avante',
     'blink',
     'dap',
     'devicons',

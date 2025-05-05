@@ -1,11 +1,11 @@
 return {
   {
     'OXY2DEV/markview.nvim',
-    ft = { 'markdown', 'Avante', 'mcphub' },
+    ft = { 'markdown', 'codecompanion', 'mcphub' },
     branch = 'main',
     opts = {
       preview = {
-        filetypes = { 'markdown', 'Avante', 'mcphub' },
+        filetypes = { 'markdown', 'codecompanion', 'mcphub' },
         ignore_buftypes = {},
       },
       max_length = 1000,

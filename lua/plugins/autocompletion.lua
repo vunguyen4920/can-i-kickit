@@ -49,7 +49,6 @@ return {
         end,
       },
       'folke/lazydev.nvim',
-      'Kaiser-Yang/blink-cmp-avante',
       {
         'saghen/blink.compat',
         version = '*',
@@ -76,16 +75,12 @@ return {
           documentation = { auto_show = false, auto_show_delay_ms = 500 },
         },
         sources = {
-          default = { 'avante', 'lsp', 'path', 'snippets', 'lazydev', 'buffer' },
+          per_filetype = {
+            codecompanion = { 'codecompanion' },
+          },
+          default = { 'lsp', 'path', 'snippets', 'lazydev', 'buffer' },
           providers = {
             lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
-            avante = {
-              module = 'blink-cmp-avante',
-              name = 'Avante',
-              opts = {
-                -- options for blink-cmp-avante
-              },
-            },
           },
         },
         snippets = { preset = 'luasnip' },
