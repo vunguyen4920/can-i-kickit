@@ -31,7 +31,7 @@ return {
         defaults = {
           mappings = {
             n = { ['q'] = require('telescope.actions').close },
-            i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+            i = { ['<C-f>'] = 'to_fuzzy_refine' },
           },
         },
         -- pickers = {}
