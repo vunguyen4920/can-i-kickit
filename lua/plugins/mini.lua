@@ -57,15 +57,13 @@ return {
         'jump_after_tsnode', -- Jump after current node end
         'jump_after_close', -- Jump after closing chars like )]}"'`
       }
-      map_multistep('i', 'll', tab_steps)
+      map_multistep('i', '<M-Tab>', tab_steps)
 
-      -- Smart S-Tab: First try moving backward through tree-sitter nodes,
-      -- then try moving before opening characters
       local shifttab_steps = {
         'jump_before_tsnode', -- Jump before current node start
         'jump_before_open', -- Jump before opening chars like ([{"'`
       }
-      map_multistep('i', 'hh', shifttab_steps)
+      map_multistep('i', '<S-Tab>', shifttab_steps)
     end,
   },
 }
