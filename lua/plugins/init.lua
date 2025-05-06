@@ -11,11 +11,6 @@ return {
     opts = { signs = false },
   },
   {
-    'max397574/better-escape.nvim',
-    event = 'InsertEnter',
-    opts = {},
-  },
-  {
     'iamyoki/buffer-reopen.nvim',
     event = 'BufEnter',
     opts = {},

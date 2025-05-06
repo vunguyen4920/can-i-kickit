@@ -83,13 +83,6 @@ return {
           end,
           desc = 'Harpoon Select 8',
         },
-        {
-          '<C-]>',
-          function()
-            harpoon:list():next()
-          end,
-          desc = 'Harpoon Next',
-        },
       }
     end,
     opts = {},

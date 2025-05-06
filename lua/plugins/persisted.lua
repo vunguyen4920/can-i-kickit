@@ -53,14 +53,9 @@ return {
     keys = function()
       return {
         {
-          '<leader>sr',
-          '<cmd>SessionLoad<CR>',
-          { desc = '[S]ession [R]estore' },
-        },
-        {
           '<leader>ss',
-          '<cmd>Telescope persisted<CR>',
-          { desc = '[S]ession [S]elect' },
+          '<cmd>SessionLoad<CR>',
+          { desc = '[S]ession Re[s]tore' },
         },
       }
     end,
