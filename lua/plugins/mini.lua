@@ -57,13 +57,13 @@ return {
         'jump_after_tsnode', -- Jump after current node end
         'jump_after_close', -- Jump after closing chars like )]}"'`
       }
-      map_multistep('i', 'l;', tab_steps)
+      map_multistep('i', 'll', tab_steps)
 
       local shifttab_steps = {
         'jump_before_tsnode', -- Jump before current node start
         'jump_before_open', -- Jump before opening chars like ([{"'`
       }
-      map_multistep('i', 'hg', shifttab_steps)
+      map_multistep('i', 'hh', shifttab_steps)
     end,
   },
 }

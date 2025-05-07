@@ -1,5 +1,16 @@
 -- TODO: mcp is not working as expected
-local spinner = {
+local default_model = 'google/gemini-2.0-flash-001'
+local available_models = {
+  'google/gemini-2.0-flash-001',
+  'google/gemini-2.5-pro-preview',
+  'anthropic/claude-3.7-sonnet',
+  'anthropic/claude-3.5-sonnet',
+  'anthropic/claude-3.5-haiku',
+  'openai/gpt-4o-mini',
+  'qwen/qwen3-32b:free',
+}
+
+local M = {
   processing = false,
   spinner_index = 1,
   namespace_id = nil,
@@ -17,9 +28,10 @@ local spinner = {
     '⠏',
   },
   filetype = 'codecompanion',
+  current_model = default_model,
 }
 
-function spinner:get_buf(filetype)
+function M:get_buf(filetype)
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
     if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].filetype == filetype then
       return buf
@@ -28,7 +40,7 @@ function spinner:get_buf(filetype)
   return nil
 end
 
-function spinner:update_spinner()
+function M:update_spinner()
   if not self.processing then
     self:stop_spinner()
     return
@@ -51,7 +63,7 @@ function spinner:update_spinner()
   })
 end
 
-function spinner:start_spinner()
+function M:start_spinner()
   self.processing = true
   self.spinner_index = 0
 
@@ -61,7 +73,7 @@ function spinner:start_spinner()
     self.timer = nil
   end
 
-  self.timer = vim.loop.new_timer()
+  self.timer = vim.uv.new_timer()
   self.timer:start(
     0,
     100,
@@ -71,7 +83,7 @@ function spinner:start_spinner()
   )
 end
 
-function spinner:stop_spinner()
+function M:stop_spinner()
   self.processing = false
 
   if self.timer then
@@ -88,26 +100,40 @@ function spinner:stop_spinner()
   vim.api.nvim_buf_clear_namespace(buf, self.namespace_id, 0, -1)
 end
 
-function spinner:init()
-  self.namespace_id = vim.api.nvim_create_namespace 'CodeCompanionSpinner'
+function M:init()
+  function M:init()
+    self.namespace_id = vim.api.nvim_create_namespace 'CodeCompanionSpinner'
 
-  vim.api.nvim_create_augroup('CodeCompanionHooks', { clear = true })
-  local group = vim.api.nvim_create_augroup('CodeCompanionHooks', {})
+    local group = vim.api.nvim_create_augroup('CodeCompanionHooks', { clear = true })
 
-  vim.api.nvim_create_autocmd({ 'User' }, {
-    pattern = 'CodeCompanionRequest*',
-    group = group,
-    callback = function(request)
-      if request.match == 'CodeCompanionRequestStarted' then
-        self:start_spinner()
-      elseif request.match == 'CodeCompanionRequestFinished' then
-        self:stop_spinner()
-      end
-    end,
-  })
+    vim.api.nvim_create_autocmd({ 'User' }, {
+      pattern = 'CodeCompanionRequest*',
+      group = group,
+      callback = function(request)
+        if request.match == 'CodeCompanionRequestStarted' then
+          self:start_spinner()
+        elseif request.match == 'CodeCompanionRequestFinished' then
+          self:stop_spinner()
+        end
+      end,
+    })
+  end
 end
 
-spinner:init()
+function M:select_model()
+  vim.ui.select(available_models, {
+    prompt = 'Select  Model:',
+  }, function(choice)
+    if choice then
+      M.current_model = choice
+      vim.notify('Selected model: ' .. M.current_model)
+    else
+      vim.notify('Model selection was canceled.', vim.log.levels.WARN)
+    end
+  end)
+end
+
+M:init()
 
 return {
   {
@@ -122,14 +148,6 @@ return {
     'olimorris/codecompanion.nvim',
     cmd = { 'CodeCompanionChat', 'CodeCompanion', 'CodeCompanionActions' },
     opts = function()
-      --[[ openrouter = {
-            __inherited_from = 'openai',
-            endpoint = 'https://openrouter.ai/api/v1',
-            api_key_name = 'OPENROUTER_API_KEY',
-            model = 'openai/gpt-4o-mini',
-      } ]]
-
-      -- Expand 'cc' into 'CodeCompanion' in the command line
       vim.cmd [[cab cc CodeCompanion]]
 
       return {
@@ -143,8 +161,28 @@ return {
             },
           },
         },
+        adapters = {
+          openrouter = function()
+            return require('codecompanion.adapters').extend('openai_compatible', {
+              env = {
+                url = 'https://openrouter.ai/api',
+                api_key = 'OPENROUTER_API_KEY',
+                chat_url = '/v1/chat/completions',
+              },
+              schema = {
+                model = {
+                  default = M.current_model,
+                },
+              },
+            })
+          end,
+        },
         strategies = {
+          inline = {
+            adapter = 'openrouter',
+          },
           chat = {
+            adapter = 'openrouter',
             send = {
               callback = function(chat)
                 vim.cmd 'stopinsert'
@@ -170,6 +208,7 @@ return {
       { '<leader>ac', '<cmd>CodeCompanionActions<cr>', desc = 'AI [C]ode Actions', mode = { 'n', 'v' } },
       { '<leader>at', '<cmd>CodeCompanionChat Toggle<cr>', desc = 'AI [T]oggle', mode = { 'n', 'v' } },
       { '<leader>aa', '<cmd>CodeCompanionChat Add<cr>', desc = 'AI [A]dd to Chat', mode = { 'v' } },
+      { '<leader>am', M.select_model, desc = 'AI Select [M]odel', mode = { 'n' } },
     },
     dependencies = {
       'nvim-lua/plenary.nvim',
