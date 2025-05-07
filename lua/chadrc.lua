@@ -23,6 +23,7 @@ M.base46 = {
     'tiny-inline-diagnostic',
     'treesitter',
     'trouble',
+    'vim-illuminate',
   },
 
   hl_override = {

@@ -44,11 +44,6 @@ return {
 
       local map_combo = require('mini.keymap').map_combo
       local mode = { 'i', 'c', 'x', 's' }
-      map_combo(mode, 'jk', '<BS><BS><Esc>')
-      map_combo(mode, 'kj', '<BS><BS><Esc>')
-      map_combo('t', 'jk', '<BS><BS><C-\\><C-n>')
-      map_combo('t', 'kj', '<BS><BS><C-\\><C-n>')
-
       map_combo('i', 'kk', '<BS><BS><Esc>[s1z=gi<Right>') -- fix spelling
 
       local map_multistep = require('mini.keymap').map_multistep
@@ -57,13 +52,13 @@ return {
         'jump_after_tsnode', -- Jump after current node end
         'jump_after_close', -- Jump after closing chars like )]}"'`
       }
-      map_multistep('i', 'll', tab_steps)
+      map_multistep('i', '<C-l>', tab_steps)
 
       local shifttab_steps = {
         'jump_before_tsnode', -- Jump before current node start
         'jump_before_open', -- Jump before opening chars like ([{"'`
       }
-      map_multistep('i', 'hh', shifttab_steps)
+      map_multistep('i', '<C-h>', shifttab_steps)
     end,
   },
 }

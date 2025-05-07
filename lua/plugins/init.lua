@@ -11,6 +11,11 @@ return {
     opts = { signs = false },
   },
   {
+    'max397574/better-escape.nvim',
+    event = 'InsertEnter',
+    opts = {},
+  },
+  {
     'iamyoki/buffer-reopen.nvim',
     event = 'BufEnter',
     opts = {},
@@ -30,5 +35,12 @@ return {
     tag = 'v0.2.1',
     event = 'BufEnter',
     opts = {},
+  },
+  {
+    'RRethy/vim-illuminate',
+    event = 'BufEnter',
+    config = function()
+      dofile(vim.g.base46_cache .. 'vim-illuminate')
+    end,
   },
 }

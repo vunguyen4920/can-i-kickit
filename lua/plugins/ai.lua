@@ -179,10 +179,10 @@ return {
         },
         strategies = {
           inline = {
-            adapter = 'openrouter',
+            adapter = 'copilot', --'openrouter',
           },
           chat = {
-            adapter = 'openrouter',
+            adapter = 'copilot', --'openrouter',
             send = {
               callback = function(chat)
                 vim.cmd 'stopinsert'
