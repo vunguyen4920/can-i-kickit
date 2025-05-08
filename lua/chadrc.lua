@@ -1,4 +1,5 @@
 -- This file  needs to have same structure as nvconfig.lua
+---@type ChadrcConfig
 local M = {}
 
 M.base46 = {
@@ -19,8 +20,10 @@ M.base46 = {
     'rainbowdelimiters',
     'semantic_tokens',
     'syntax',
+    'tbline',
     'telescope',
     'tiny-inline-diagnostic',
+    'todo',
     'treesitter',
     'trouble',
     'vim-illuminate',
@@ -29,6 +32,7 @@ M.base46 = {
   hl_override = {
     Comment = { italic = true },
     ['@comment'] = { italic = true },
+    Cursor = { fg = '#38a89d', bg = '#ee6d85' },
   },
 }
 

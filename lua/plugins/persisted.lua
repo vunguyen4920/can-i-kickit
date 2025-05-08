@@ -13,6 +13,7 @@ local ignored_filetypes = {
   ['NeogitPopup'] = true,
   ['NeogitStatus'] = true,
   ['codecompanion'] = true,
+  ['checkhealth'] = true,
 }
 
 return {
