@@ -1,4 +1,4 @@
--- TODO: mcp is not working as expected
+-- TODO: mcp is not working as expected with vars & commands
 local default_model = 'google/gemini-2.0-flash-001'
 local available_models = {
   'google/gemini-2.0-flash-001',
@@ -30,6 +30,19 @@ local M = {
   filetype = 'codecompanion',
   current_model = default_model,
 }
+
+function M:select_model()
+  vim.ui.select(available_models, {
+    prompt = 'Select  Model:',
+  }, function(choice)
+    if choice then
+      M.current_model = choice
+      vim.notify('Selected model: ' .. M.current_model)
+    else
+      vim.notify('Model selection was canceled.', vim.log.levels.WARN)
+    end
+  end)
+end
 
 function M:get_buf(filetype)
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
@@ -73,7 +86,7 @@ function M:start_spinner()
     self.timer = nil
   end
 
-  self.timer = vim.uv.new_timer()
+  self.timer = vim.loop.new_timer()
   self.timer:start(
     0,
     100,
@@ -101,36 +114,22 @@ function M:stop_spinner()
 end
 
 function M:init()
-  function M:init()
-    self.namespace_id = vim.api.nvim_create_namespace 'CodeCompanionSpinner'
+  self.namespace_id = vim.api.nvim_create_namespace 'CodeCompanionSpinner'
 
-    local group = vim.api.nvim_create_augroup('CodeCompanionHooks', { clear = true })
+  vim.api.nvim_create_augroup('CodeCompanionHooks', { clear = true })
+  local group = vim.api.nvim_create_augroup('CodeCompanionHooks', {})
 
-    vim.api.nvim_create_autocmd({ 'User' }, {
-      pattern = 'CodeCompanionRequest*',
-      group = group,
-      callback = function(request)
-        if request.match == 'CodeCompanionRequestStarted' then
-          self:start_spinner()
-        elseif request.match == 'CodeCompanionRequestFinished' then
-          self:stop_spinner()
-        end
-      end,
-    })
-  end
-end
-
-function M:select_model()
-  vim.ui.select(available_models, {
-    prompt = 'Select  Model:',
-  }, function(choice)
-    if choice then
-      M.current_model = choice
-      vim.notify('Selected model: ' .. M.current_model)
-    else
-      vim.notify('Model selection was canceled.', vim.log.levels.WARN)
-    end
-  end)
+  vim.api.nvim_create_autocmd({ 'User' }, {
+    pattern = 'CodeCompanionRequest*',
+    group = group,
+    callback = function(request)
+      if request.match == 'CodeCompanionRequestStarted' then
+        self:start_spinner()
+      elseif request.match == 'CodeCompanionRequestFinished' then
+        self:stop_spinner()
+      end
+    end,
+  })
 end
 
 M:init()
@@ -176,6 +175,11 @@ return {
               },
             })
           end,
+        },
+        display = {
+          chat = {
+            auto_scroll = false,
+          },
         },
         strategies = {
           inline = {
