@@ -1,7 +1,7 @@
 return {
   {
     'andymass/vim-matchup',
-    event = 'BufEnter',
+    lazy = false,
     opts = function()
       require('nvim-treesitter.configs').setup {
         matchup = {
@@ -9,7 +9,8 @@ return {
         },
       }
 
-      vim.g.matchup_matchparen_offscreen = { method = 'popup' }
+      vim.g.matchup_matchparen_offscreen = { method = 'popup', fullwidth = 1, syntax_hl = 1 }
+      vim.g.matchup_matchparen_deferred = 1
 
       return {}
     end,

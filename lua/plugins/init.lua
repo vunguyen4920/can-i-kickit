@@ -38,7 +38,14 @@ return {
     'mvllow/modes.nvim',
     tag = 'v0.2.1',
     event = 'BufEnter',
-    opts = {},
+    opts = {
+      colors = {
+        copy = '#d7a65f',
+        delete = '#c75c6a',
+        insert = '#38a89d',
+        visual = '#a485dd',
+      },
+    },
   },
   {
     'RRethy/vim-illuminate',

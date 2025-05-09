@@ -8,19 +8,3 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
-
--- Toggle cursorline on InsertLeave and WinEnter
-vim.api.nvim_create_autocmd({ 'InsertLeave', 'WinEnter' }, {
-  group = vim.api.nvim_create_augroup('cursorline_toggle', { clear = true }),
-  callback = function()
-    vim.opt.cursorline = true
-  end,
-})
-
--- Disable cursorline on InsertEnter and WinLeave
-vim.api.nvim_create_autocmd({ 'InsertEnter', 'WinLeave' }, {
-  group = 'cursorline_toggle',
-  callback = function()
-    vim.opt.cursorline = false
-  end,
-})
