@@ -22,7 +22,7 @@ return {
             pane = 1,
             cmd = "curl 'wttr.in/?0QFp&lang=vi'; sleep .1",
             hl = 'header',
-            indent = 12,
+            indent = 6,
           },
           { section = 'header', pane = 2, gap = 1, padding = 1 },
           { section = 'keys', pane = 2, gap = 1, padding = 1 },
