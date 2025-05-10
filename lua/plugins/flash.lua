@@ -30,7 +30,15 @@ return {
         },
         {
           mode = { 'n', 'x', 'o' },
-          'Z',
+          '<C-s>',
+          function()
+            flash.treesitter()
+          end,
+          desc = 'Flash Treesitter',
+        },
+        {
+          mode = { 'n', 'x', 'o' },
+          '<M-s>',
           function()
             flash.jump {
               pattern = vim.fn.expand '<cword>',
