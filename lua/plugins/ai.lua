@@ -1,15 +1,4 @@
 -- TODO: mcp is not working as expected with vars & commands
-local default_model = 'google/gemini-2.0-flash-001'
-local available_models = {
-  'google/gemini-2.0-flash-001',
-  'google/gemini-2.5-pro-preview',
-  'anthropic/claude-3.7-sonnet',
-  'anthropic/claude-3.5-sonnet',
-  'anthropic/claude-3.5-haiku',
-  'openai/gpt-4o-mini',
-  'qwen/qwen3-32b:free',
-}
-
 local M = {
   processing = false,
   spinner_index = 1,
@@ -28,21 +17,7 @@ local M = {
     '⠏',
   },
   filetype = 'codecompanion',
-  current_model = default_model,
 }
-
-function M:select_model()
-  vim.ui.select(available_models, {
-    prompt = 'Select  Model:',
-  }, function(choice)
-    if choice then
-      M.current_model = choice
-      vim.notify('Selected model: ' .. M.current_model)
-    else
-      vim.notify('Model selection was canceled.', vim.log.levels.WARN)
-    end
-  end)
-end
 
 function M:get_buf(filetype)
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
@@ -170,7 +145,7 @@ return {
               },
               schema = {
                 model = {
-                  default = M.current_model,
+                  default = 'google/gemini-2.0-flash-001',
                 },
               },
             })
@@ -183,10 +158,10 @@ return {
         },
         strategies = {
           inline = {
-            adapter = 'copilot', --'openrouter',
+            adapter = 'openrouter', --'copilot',
           },
           chat = {
-            adapter = 'copilot', --'openrouter',
+            adapter = 'openrouter', --'copilot',
             send = {
               callback = function(chat)
                 vim.cmd 'stopinsert'
@@ -212,7 +187,6 @@ return {
       { '<leader>ac', '<cmd>CodeCompanionActions<cr>', desc = 'AI [C]ode Actions', mode = { 'n', 'v' } },
       { '<leader>at', '<cmd>CodeCompanionChat Toggle<cr>', desc = 'AI [T]oggle', mode = { 'n', 'v' } },
       { '<leader>aa', '<cmd>CodeCompanionChat Add<cr>', desc = 'AI [A]dd to Chat', mode = { 'v' } },
-      { '<leader>am', M.select_model, desc = 'AI Select [M]odel', mode = { 'n' } },
     },
     dependencies = {
       'nvim-lua/plenary.nvim',

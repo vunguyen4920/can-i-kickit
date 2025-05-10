@@ -14,7 +14,7 @@ return {
     },
   },
   {
-    'williamboman/mason.nvim',
+    'mason-org/mason.nvim',
     cmd = { 'Mason', 'MasonInstall', 'MasonUpdate' },
     build = ':MasonUpdate',
     init = function()
@@ -27,8 +27,8 @@ return {
     'neovim/nvim-lspconfig',
     event = { 'BufReadPost', 'BufNewFile' },
     dependencies = {
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
+      'mason-org/mason.nvim',
+      'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
@@ -312,33 +312,6 @@ return {
     end,
     opts = function()
       return {}
-    end,
-  },
-  {
-    'aznhe21/actions-preview.nvim',
-    keys = {
-      {
-        mode = { 'n', 'v' },
-        'gap',
-        function()
-          require('actions-preview').code_actions()
-        end,
-        desc = '[G]oto Code [A]ctions [P]reviews',
-      },
-    },
-    config = function()
-      require('actions-preview').setup {
-        telescope = {
-          sorting_strategy = 'ascending',
-          layout_strategy = 'vertical',
-          layout_config = {
-            width = 0.9,
-            height = 0.9,
-            prompt_position = 'bottom',
-            preview_cutoff = 10,
-          },
-        },
-      }
     end,
   },
   {
