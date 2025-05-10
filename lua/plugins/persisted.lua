@@ -14,6 +14,7 @@ local ignored_filetypes = {
   ['NeogitStatus'] = true,
   ['codecompanion'] = true,
   ['checkhealth'] = true,
+  ['trouble'] = true,
 }
 
 return {

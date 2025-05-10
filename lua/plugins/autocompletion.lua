@@ -55,11 +55,12 @@ return {
         opts = {},
       },
     },
+    init = function()
+      dofile(vim.g.base46_cache .. 'blink')
+    end,
     --- @module 'blink.cmp'
     --- @type function|blink.cmp.Config
     opts = function()
-      dofile(vim.g.base46_cache .. 'blink')
-
       return {
         keymap = {
           -- See :h blink-cmp-config-keymap for defining your own keymap

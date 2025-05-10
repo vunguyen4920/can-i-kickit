@@ -14,13 +14,6 @@ return {
           desc = 'Harpoon [M]ark',
         },
         {
-          '<leader>hl',
-          function()
-            toggle_telescope(harpoon:list())
-          end,
-          desc = 'Harpoon Telescope [L]ist',
-        },
-        {
           '<leader>hq',
           function()
             harpoon.ui:toggle_quick_menu(harpoon:list())

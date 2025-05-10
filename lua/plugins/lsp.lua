@@ -7,6 +7,9 @@ return {
       library = {
         -- Load luvit types when the `vim.uv` word is found
         { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+        { path = 'snacks.nvim', words = { 'Snacks' } },
+        { path = 'flash.nvim', words = { 'Flash' } },
+        'ui/nvchad_types',
       },
     },
   },
@@ -14,11 +17,10 @@ return {
     'williamboman/mason.nvim',
     cmd = { 'Mason', 'MasonInstall', 'MasonUpdate' },
     build = ':MasonUpdate',
-    opts = function()
+    init = function()
       dofile(vim.g.base46_cache .. 'mason')
-
-      return {}
     end,
+    opts = {},
   },
   {
     -- Main LSP Configuration
@@ -40,6 +42,10 @@ return {
         version = false, -- last release is way too old
       },
     },
+    init = function()
+      dofile(vim.g.base46_cache .. 'lsp')
+      dofile(vim.g.base46_cache .. 'semantic_tokens')
+    end,
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
@@ -158,9 +164,8 @@ return {
         }, ]]
       }
 
-      local vue_typescript_plugin = require('mason-registry').get_package('vue-language-server'):get_install_path()
-        .. '/node_modules/@vue/language-server'
-        .. '/node_modules/@vue/typescript-plugin'
+      local vue_typescript_plugin =
+        vim.fn.expand('$MASON/packages/vue-language-server/' .. '/node_modules/@vue/language-server' .. '/node_modules/@vue/typescript-plugin')
 
       --  Available keys are:
       --  - cmd (table): Override the default command used to start the server
@@ -296,17 +301,16 @@ return {
       --   vim.lsp.config(server, config)
       --   vim.lsp.enable(server)
       -- end
-
-      dofile(vim.g.base46_cache .. 'lsp')
-      dofile(vim.g.base46_cache .. 'semantic_tokens')
     end,
   },
   {
     'rachartier/tiny-inline-diagnostic.nvim',
     event = 'LspAttach', -- Or `LspAttach`
     priority = 1000, -- needs to be loaded in first
-    opts = function()
+    init = function()
       dofile(vim.g.base46_cache .. 'tiny-inline-diagnostic')
+    end,
+    opts = function()
       return {}
     end,
   },

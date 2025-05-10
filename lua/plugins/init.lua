@@ -8,11 +8,10 @@ return {
     'folke/todo-comments.nvim',
     event = 'VimEnter',
     dependencies = { 'nvim-lua/plenary.nvim' },
-    opts = function()
+    init = function()
       dofile(vim.g.base46_cache .. 'todo')
-
-      return { signs = false }
     end,
+    opts = { signs = false },
   },
   {
     'max397574/better-escape.nvim',
@@ -46,12 +45,5 @@ return {
         visual = '#a485dd',
       },
     },
-  },
-  {
-    'RRethy/vim-illuminate',
-    event = 'BufEnter',
-    config = function()
-      dofile(vim.g.base46_cache .. 'vim-illuminate')
-    end,
   },
 }

@@ -20,6 +20,9 @@ return {
       { 'nvim-telescope/telescope-ui-select.nvim' },
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
+    init = function()
+      dofile(vim.g.base46_cache .. 'telescope')
+    end,
     config = function()
       -- Two important keymaps to use while in Telescope are:
       --  - Insert mode: <c-/>
@@ -93,8 +96,6 @@ return {
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
-
-      dofile(vim.g.base46_cache .. 'telescope')
     end,
   },
 }

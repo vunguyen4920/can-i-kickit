@@ -25,6 +25,7 @@ map('x', '<leader>p', [["_dP]])
 map('n', '<leader>me', '<cmd>set mouse=a<CR>', { desc = '[M]ouse [E]nable' })
 map('n', '<leader>md', '<cmd>set mouse=<CR>', { desc = '[M]ouse [D]isable' })
 map('i', 'jk', '<ESC>', { desc = '<ESC> Escape Insert mode' })
+map('i', 'jj', '<ESC>', { desc = '<ESC> Escape Insert mode' })
 map('i', 'kj', '<ESC>', { desc = '<ESC> Escape Insert mode' })
 
 -- Formatter

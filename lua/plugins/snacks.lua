@@ -8,7 +8,7 @@ return {
       bigfile = { enabled = true },
       bufdelete = { enabled = true },
       dashboard = {
-        enable = true,
+        enabled = true,
         sections = {
           {
             section = 'terminal',
@@ -46,7 +46,6 @@ return {
       statuscolumn = { enabled = true },
     },
     init = function()
-      local prev = { new_name = '', old_name = '' } -- Prevents duplicate events
       vim.api.nvim_create_autocmd('User', {
         pattern = 'OilActionsPost',
         callback = function(event)
@@ -64,6 +63,7 @@ return {
           local dashboard_on_empty = (deleted_name == '' and deleted_ft == '')
             or (vim.api.nvim_buf_get_name(0) == '' and vim.api.nvim_get_option_value('filetype', { buf = 0 }) == '')
           if dashboard_on_empty then
+            ---@diagnostic disable-next-line: missing-fields
             Snacks.dashboard { win = 0 }
           end
         end,

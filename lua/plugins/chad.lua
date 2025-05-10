@@ -7,14 +7,15 @@ return {
       { 'nvim-tree/nvim-web-devicons', lazy = true },
       'nvchad/volt',
     },
-    config = function()
-      require 'nvchad'
-
+    init = function()
       dofile(vim.g.base46_cache .. 'defaults')
       dofile(vim.g.base46_cache .. 'statusline')
       dofile(vim.g.base46_cache .. 'tbline')
       dofile(vim.g.base46_cache .. 'devicons')
       dofile(vim.g.base46_cache .. 'nvshades')
+    end,
+    config = function()
+      require 'nvchad'
 
       local map = vim.keymap.set
 

@@ -1,16 +1,15 @@
 return {
   {
     'MagicDuck/grug-far.nvim',
-    umd = { 'GrugFar', 'GrugBarWithin' },
-    opts = function()
+    cmd = { 'GrugFar', 'GrugBarWithin' },
+    init = function()
       dofile(vim.g.base46_cache .. 'grug_far')
-
-      return {
-        keymaps = {
-          close = { n = 'q' },
-        },
-      }
     end,
+    opts = {
+      keymaps = {
+        close = { n = 'q' },
+      },
+    },
     keys = function()
       local grug = require 'grug-far'
 

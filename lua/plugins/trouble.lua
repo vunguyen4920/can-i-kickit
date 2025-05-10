@@ -2,11 +2,10 @@ return {
   {
     'folke/trouble.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    opts = function()
+    init = function()
       dofile(vim.g.base46_cache .. 'trouble')
-
-      return {}
     end,
+    opts = {},
     keys = {
       {
         '<leader>td',

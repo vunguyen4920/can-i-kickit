@@ -61,9 +61,10 @@ return {
         desc = 'Debug: See last session result.',
       },
     },
-    config = function()
+    init = function()
       dofile(vim.g.base46_cache .. 'dap')
-
+    end,
+    config = function()
       local dap = require 'dap'
       local dapui = require 'dapui'
 
