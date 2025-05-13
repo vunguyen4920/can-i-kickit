@@ -1,5 +1,5 @@
 return {
-  { -- Autocompletion
+  { -- Autocompletion TODO: i am still not satisfied with this
     'saghen/blink.cmp',
     event = 'VimEnter',
     version = '1.*',
@@ -61,6 +61,13 @@ return {
     --- @module 'blink.cmp'
     --- @type function|blink.cmp.Config
     opts = function()
+      local source_priority = {
+        snippets = 4,
+        lsp = 1,
+        path = 2,
+        buffer = 3,
+      }
+
       return {
         keymap = {
           -- See :h blink-cmp-config-keymap for defining your own keymap
@@ -85,12 +92,22 @@ return {
           },
         },
         snippets = { preset = 'luasnip' },
+        cmdline = {
+          enabled = false,
+        },
 
         -- See :h blink-cmp-config-fuzzy for more information
         fuzzy = {
           implementation = 'lua',
           sorts = {
-            'exact',
+            function(a, b)
+              local a_priority = source_priority[a.source_id]
+              local b_priority = source_priority[b.source_id]
+              if a_priority ~= b_priority then
+                return a_priority > b_priority
+              end
+            end,
+            -- 'exact',
             -- defaults
             'score',
             'sort_text',
