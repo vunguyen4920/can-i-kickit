@@ -121,11 +121,17 @@ return {
   {
     'olimorris/codecompanion.nvim',
     cmd = { 'CodeCompanionChat', 'CodeCompanion', 'CodeCompanionActions' },
-    opts = function()
+    init = function()
       vim.cmd [[cab cc CodeCompanion]]
-
+    end,
+    opts = function()
       return {
         extensions = {
+          --[[ vectorcode = {
+            opts = {
+              add_tool = true,
+            },
+          }, ]]
           mcphub = {
             callback = 'mcphub.extensions.codecompanion',
             opts = {
@@ -177,6 +183,12 @@ return {
               },
               stop = {
                 modes = { n = 's' },
+              },
+            },
+            tools = {
+              opts = {
+                auto_submit_errors = false, -- Send any errors to the LLM automatically?
+                auto_submit_success = false, -- Send any successful output to the LLM automatically?
               },
             },
           },
@@ -245,5 +257,12 @@ return {
         },
       },
     },
+  },
+  {
+    'Davidyz/VectorCode',
+    enabled = false,
+    version = '*', -- optional, depending on whether you're on nightly or release
+    build = 'pipx upgrade vectorcode', -- optional but recommended. This keeps your CLI up-to-date.
+    dependencies = { 'nvim-lua/plenary.nvim' },
   },
 }

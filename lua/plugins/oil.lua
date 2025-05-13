@@ -15,9 +15,8 @@ local detail = false
 return {
   {
     'stevearc/oil.nvim',
-    ---@module 'oil'
-    ---@type oil.SetupOpts
     cmd = { 'Oil' },
+    lazy = false,
     priority = 1000,
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     keys = {
@@ -34,6 +33,8 @@ return {
         desc = '[E]xplorer [F]loat',
       },
     },
+    ---@module 'oil'
+    ---@type oil.SetupOpts
     opts = {
       view_options = {
         show_hidden = true,

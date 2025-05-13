@@ -96,6 +96,7 @@ return {
         },
         word = true,
         cyclic = true,
+        preserve_case = true,
       }
 
       local months = augend.constant.new {
@@ -115,6 +116,7 @@ return {
         },
         word = true,
         cyclic = true,
+        preserve_case = true,
       }
 
       local capitalized_boolean = augend.constant.new {
@@ -146,7 +148,8 @@ return {
             augend.integer.alias.decimal, -- nonnegative decimal number (0, 1, 2, 3, ...)
             augend.integer.alias.decimal_int, -- nonnegative and negative decimal number
             augend.integer.alias.hex, -- nonnegative hex number  (0x01, 0x1a1f, etc.)
-            augend.date.alias['%Y/%m/%d'], -- date (2022/02/19, etc.)
+            augend.date.alias['%Y/%m/%d'], -- date (2000/09/04, etc.)
+            augend.date.alias['%d/%m/%Y'], -- date (04/09/2000, etc.)
             ordinal_numbers,
             weekdays,
             months,
