@@ -30,7 +30,7 @@ return {
         },
         {
           mode = { 'n', 'x', 'o' },
-          '<C-s>',
+          '<M-s>',
           function()
             flash.treesitter()
           end,
@@ -38,11 +38,9 @@ return {
         },
         {
           mode = { 'n', 'x', 'o' },
-          '<M-s>',
+          '<C-s>',
           function()
-            flash.jump {
-              pattern = vim.fn.expand '<cword>',
-            }
+            require('flash').remote()
           end,
           desc = 'Flash Remote',
         },

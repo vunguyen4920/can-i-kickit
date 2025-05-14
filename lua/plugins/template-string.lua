@@ -1,7 +1,7 @@
 return {
   {
     'axelvc/template-string.nvim',
-    event = 'InsertEnter',
+    event = 'BufEnter',
     opts = {
       remove_template_string = true,
     },

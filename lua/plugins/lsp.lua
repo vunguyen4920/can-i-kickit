@@ -149,8 +149,7 @@ return {
           },
         } or {},
         virtual_text = false,
-        virtual_lines = false,
-        --[[ virtual_lines = {
+        virtual_lines = {
           current_line = true,
           format = function(diagnostic)
             local diagnostic_message = {
@@ -161,7 +160,7 @@ return {
             }
             return diagnostic_message[diagnostic.severity]
           end,
-        }, ]]
+        },
       }
 
       local vue_typescript_plugin =
@@ -301,17 +300,6 @@ return {
       --   vim.lsp.config(server, config)
       --   vim.lsp.enable(server)
       -- end
-    end,
-  },
-  {
-    'rachartier/tiny-inline-diagnostic.nvim',
-    event = 'LspAttach', -- Or `LspAttach`
-    priority = 1000, -- needs to be loaded in first
-    init = function()
-      dofile(vim.g.base46_cache .. 'tiny-inline-diagnostic')
-    end,
-    opts = function()
-      return {}
     end,
   },
   {

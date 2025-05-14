@@ -8,13 +8,14 @@ return {
     end,
     opts = function()
       return {
+        default_args = { DiffviewFileHistory = { '%' } },
         enhanced_diff_hl = true,
       }
     end,
     keys = {
       {
         '<leader>gh',
-        '<cmd>DiffviewFileHistory %<CR>',
+        '<cmd>DiffviewFileHistory<CR>',
         desc = 'Git Diffview Current File [H]istory',
       },
     },

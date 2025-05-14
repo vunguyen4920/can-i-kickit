@@ -1,8 +1,9 @@
 return {
-  { -- Autocompletion TODO: i am still not satisfied with this
+  { -- Autocompletion
     'saghen/blink.cmp',
-    event = 'VimEnter',
+    event = 'InsertEnter',
     version = '1.*',
+    build = 'cargo +nightly build --release',
     dependencies = {
       -- Snippet Engine
       {
@@ -63,18 +64,15 @@ return {
     opts = function()
       local source_priority = {
         snippets = 4,
-        lsp = 1,
-        path = 2,
-        buffer = 3,
+        lsp = 2,
+        path = 3,
+        buffer = 1,
       }
 
       return {
         keymap = {
           -- See :h blink-cmp-config-keymap for defining your own keymap
           preset = 'default',
-
-          -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-          --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
         appearance = {
           nerd_font_variant = 'mono',

@@ -1,4 +1,3 @@
--- TODO: mcp is not working as expected with vars & commands
 local M = {
   processing = false,
   spinner_index = 1,
@@ -203,21 +202,14 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-treesitter/nvim-treesitter',
-      {
-        'ravitemer/mcphub.nvim',
-        dependencies = {
-          'nvim-lua/plenary.nvim', -- Required for Job and HTTP requests
-        },
-        event = 'VeryLazy',
-        build = 'bundled_build.lua',
-        opts = {
-          use_bundled_binary = true, -- Use the bundled binary instead of the global one
-        },
-        keys = {
-          { '<leader>mcp', '<cmd>MCPHub<cr>', desc = '[MCP]Hub' },
-        },
-      },
     },
+  },
+  {
+    'ravitemer/mcphub.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    build = 'bundled_build.lua',
+    opts = { use_bundled_binary = true },
+    keys = { { '<leader>mcp', '<cmd>MCPHub<cr>', desc = '[MCP]Hub' } },
   },
   {
     'milanglacier/minuet-ai.nvim',
