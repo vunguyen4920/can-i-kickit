@@ -15,6 +15,7 @@ local ignored_filetypes = {
   ['codecompanion'] = true,
   ['checkhealth'] = true,
   ['trouble'] = true,
+  ['aerial'] = true,
 }
 
 return {

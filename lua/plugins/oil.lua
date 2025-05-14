@@ -16,8 +16,6 @@ return {
   {
     'stevearc/oil.nvim',
     cmd = { 'Oil' },
-    lazy = false,
-    priority = 1000,
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     keys = {
       {
@@ -33,6 +31,40 @@ return {
         desc = '[E]xplorer [F]loat',
       },
     },
+    init = function()
+      -- Close the window when oil is closed
+      -- Also has the effect of quitting vim when the Oil buffer is the last one
+      vim.api.nvim_create_autocmd('BufUnload', {
+        pattern = 'oil://*',
+        callback = function()
+          if vim.api.nvim_buf_get_name(0) == '' then
+            vim.cmd 'confirm q'
+          end
+        end,
+      })
+
+      -- If nvim is started with a directory argument, load oil immediately
+      -- via https://github.com/folke/lazy.nvim/issues/533
+      if vim.fn.argc() == 1 then
+        local argv0 = vim.fn.argv(0)
+        ---@cast argv0 string
+        local stat = vim.uv.fs_stat(argv0)
+        if stat and stat.type == 'directory' then
+          require('lazy').load { plugins = { 'oil.nvim' } }
+        end
+      end
+      if not require('lazy.core.config').plugins['oil.nvim']._.loaded then
+        vim.api.nvim_create_autocmd('BufNew', {
+          callback = function()
+            if vim.fn.isdirectory(vim.fn.expand '<afile>') == 1 then
+              require('lazy').load { plugins = { 'oil.nvim' } }
+              -- Once oil is loaded, we can delete this autocmd
+              return true
+            end
+          end,
+        })
+      end
+    end,
     ---@module 'oil'
     ---@type oil.SetupOpts
     opts = {

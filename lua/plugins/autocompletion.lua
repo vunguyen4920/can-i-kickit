@@ -62,13 +62,6 @@ return {
     --- @module 'blink.cmp'
     --- @type function|blink.cmp.Config
     opts = function()
-      local source_priority = {
-        snippets = 4,
-        lsp = 2,
-        path = 3,
-        buffer = 1,
-      }
-
       return {
         keymap = {
           -- See :h blink-cmp-config-keymap for defining your own keymap
@@ -96,19 +89,13 @@ return {
 
         -- See :h blink-cmp-config-fuzzy for more information
         fuzzy = {
-          implementation = 'lua',
+          implementation = 'prefer_rust',
           sorts = {
-            function(a, b)
-              local a_priority = source_priority[a.source_id]
-              local b_priority = source_priority[b.source_id]
-              if a_priority ~= b_priority then
-                return a_priority > b_priority
-              end
-            end,
             -- 'exact',
             -- defaults
             'score',
             'sort_text',
+            'label',
           },
         },
 
