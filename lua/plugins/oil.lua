@@ -86,7 +86,18 @@ return {
         },
         ['gY'] = {
           desc = 'Yank absolute path to clipboard',
-          callback = 'actions.copy_entry_path',
+          callback = function()
+            local oil = require 'oil'
+            local entry = oil.get_cursor_entry()
+            local dir = oil.get_current_dir()
+            if not entry or not dir then
+              return
+            end
+
+            local abs_path = dir .. entry.name
+            vim.fn.setreg(vim.v.register, abs_path)
+            vim.notify('Copied absolute path: ' .. abs_path, vim.log.levels.INFO)
+          end,
         },
         ['gy'] = {
           desc = 'Yank relative path to clipboard',
