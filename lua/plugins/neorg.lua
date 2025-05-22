@@ -1,3 +1,4 @@
+-- TODO: Learn neorg
 return {
   {
     'nvim-neorg/neorg',

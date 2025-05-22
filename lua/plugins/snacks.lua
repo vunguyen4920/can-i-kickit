@@ -61,6 +61,28 @@ return {
         group = vim.api.nvim_create_augroup('dashboard_on_empty', { clear = true }),
         callback = function(args)
           vim.schedule(function()
+            local ignored_filetypes = {
+              'qf',
+              'netrw',
+              'NvimTree',
+              'lazy',
+              'mason',
+              'harpoon',
+              'spectre_panel',
+              'grug-far',
+              'grug-far-history',
+              'grug-far-help',
+              'NeogitPopup',
+              'NeogitStatus',
+              'codecompanion',
+              'checkhealth',
+              'trouble',
+              'aerial',
+            }
+            if vim.tbl_contains(ignored_filetypes, vim.api.nvim_get_option_value('filetype', { buf = args.buf })) then
+              return
+            end
+
             local deleted_name = vim.api.nvim_buf_get_name(args.buf)
             local deleted_ft = vim.api.nvim_get_option_value('filetype', { buf = args.buf })
             local dashboard_on_empty = (deleted_name == '' and deleted_ft == '')

@@ -28,13 +28,6 @@ return {
           neogit.open,
           desc = 'Git Neogit Open',
         },
-        {
-          '<leader>gs',
-          function()
-            neogit.open { kind = 'split' }
-          end,
-          desc = 'Git Neogit Open Split',
-        },
       }
     end,
   },

@@ -50,7 +50,7 @@ return {
             }
           end,
           mode = '',
-          desc = 'Grug [F]ind [C]urrent',
+          desc = 'Grug [F]ind [I]n Range',
         },
       }
     end,

@@ -58,7 +58,7 @@ return {
         'n',
         '<leader>sxf',
         "<cmd>lua require('telescope.builtin').find_files({hidden = true,no_ignore = true, no_ignore_parent = true})<cr>",
-        { desc = '[H]idden [S]earch by [F]iles' }
+        { desc = '[S]earch [X]Secret [F]iles' }
       )
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
@@ -67,7 +67,7 @@ return {
         'n',
         '<leader>sxg',
         "<cmd>lua require('telescope.builtin').live_grep({additional_args = {'--hidden'}})<cr>",
-        { desc = '[H]idden [S]earch by [G]rep' }
+        { desc = '[S]earch [X]Secret [G]rep' }
       )
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })

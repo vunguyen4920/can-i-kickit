@@ -1,21 +1,20 @@
 local ignored_filetypes = {
-  ['qf'] = true,
-  ['netrw'] = true,
-  ['NvimTree'] = true,
-  ['lazy'] = true,
-  ['mason'] = true,
-  ['oil'] = true,
-  ['harpoon'] = true,
-  ['spectre_panel'] = true,
-  ['grug-far'] = true,
-  ['grug-far-history'] = true,
-  ['grug-far-help'] = true,
-  ['NeogitPopup'] = true,
-  ['NeogitStatus'] = true,
-  ['codecompanion'] = true,
-  ['checkhealth'] = true,
-  ['trouble'] = true,
-  ['aerial'] = true,
+  'qf',
+  'netrw',
+  'NvimTree',
+  'lazy',
+  'mason',
+  'harpoon',
+  'spectre_panel',
+  'grug-far',
+  'grug-far-history',
+  'grug-far-help',
+  'NeogitPopup',
+  'NeogitStatus',
+  'codecompanion',
+  'checkhealth',
+  'trouble',
+  'aerial',
 }
 
 return {
@@ -26,9 +25,10 @@ return {
       use_git_branch = true,
       should_save = function()
         -- Do not save if the alpha dashboard is the current filetype
-        if ignored_filetypes[vim.bo.filetype] then
+        if vim.tbl_contains(ignored_filetypes, vim.bo.filetype) then
           return false
         end
+
         return true
       end,
     },
@@ -46,7 +46,7 @@ return {
         pattern = 'PersistedSavePre',
         callback = function()
           for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-            if ignored_filetypes[vim.bo[buf].filetype] then
+            if vim.tbl_contains(ignored_filetypes, vim.api.nvim_get_option_value('filetype', { buf = buf })) then
               vim.api.nvim_buf_delete(buf, { force = true })
             end
           end

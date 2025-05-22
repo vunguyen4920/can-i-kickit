@@ -19,11 +19,11 @@ return {
 
       local map = vim.keymap.set
 
-      map('n', '<tab>', function()
+      map('n', '<C-n>', function()
         require('nvchad.tabufline').next()
       end, { desc = 'buffer goto next' })
 
-      map('n', '<S-tab>', function()
+      map('n', '<C-p>', function()
         require('nvchad.tabufline').prev()
       end, { desc = 'buffer goto prev' })
 
