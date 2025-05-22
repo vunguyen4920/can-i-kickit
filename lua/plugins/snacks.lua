@@ -46,12 +46,30 @@ return {
       statuscolumn = { enabled = true },
     },
     init = function()
+      -- rename on oil actions
       vim.api.nvim_create_autocmd('User', {
         pattern = 'OilActionsPost',
         callback = function(event)
           if event.data.actions.type == 'move' then
             Snacks.rename.on_rename_file(event.data.actions.src_url, event.data.actions.dest_url)
           end
+        end,
+      })
+
+      -- on empty show dashboard
+      vim.api.nvim_create_autocmd('BufDelete', {
+        group = vim.api.nvim_create_augroup('dashboard_on_empty', { clear = true }),
+        callback = function(args)
+          vim.schedule(function()
+            local deleted_name = vim.api.nvim_buf_get_name(args.buf)
+            local deleted_ft = vim.api.nvim_get_option_value('filetype', { buf = args.buf })
+            local dashboard_on_empty = (deleted_name == '' and deleted_ft == '')
+              or (vim.api.nvim_buf_get_name(0) == '' and vim.api.nvim_get_option_value('filetype', { buf = 0 }) == '')
+            if dashboard_on_empty then
+              ---@diagnostic disable-next-line: missing-fields
+              Snacks.dashboard { buf = 0, win = 0 }
+            end
+          end)
         end,
       })
     end,
