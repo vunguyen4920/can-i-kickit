@@ -3,7 +3,8 @@
 local M = {}
 
 M.base46 = {
-  theme = 'tokyodark',
+  ---@diagnostic disable-next-line: assign-type-mismatch
+  theme = 'saigondark',
 
   integrations = {
     'blink',
@@ -27,12 +28,6 @@ M.base46 = {
     'treesitter',
     'trouble',
     'vim-illuminate',
-  },
-
-  hl_override = {
-    Comment = { italic = true },
-    ['@comment'] = { italic = true },
-    Cursor = { bg = '#38a89d' },
   },
 }
 
