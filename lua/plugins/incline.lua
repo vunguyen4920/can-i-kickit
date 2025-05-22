@@ -60,9 +60,6 @@ return {
             { '|  ' .. vim.api.nvim_win_get_number(props.win), group = 'DevIconWindows' },
           }
         end,
-        hide = {
-          cursorline = 'focused_win',
-        },
       }
     end,
     event = 'BufEnter',
