@@ -246,7 +246,7 @@ return {
             'vue',
           },
         },
-        volar = {},
+        vue_ls = {},
         yamlls = {
           settings = {
             yaml = {
