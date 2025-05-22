@@ -71,7 +71,7 @@ return {
             vertical = { top = 0, bottom = 0 }, -- shift to overlap window borders
             horizontal = { left = 0, right = 2 },
           },
-          zindex = 100,
+          zindex = 50,
         },
       }
     end,
