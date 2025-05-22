@@ -7,8 +7,14 @@ return {
       return {
         render = function(props)
           local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ':t')
+
+          local filetype = vim.api.nvim_get_option_value('filetype', { buf = props.buf })
           if filename == '' then
-            filename = '[No Name]'
+            if filetype then
+              filename = filetype
+            else
+              filename = '[No Name]'
+            end
           end
           local ft_icon, ft_color = devicons.get_icon_color(filename)
 
@@ -60,6 +66,13 @@ return {
             { '|  ' .. vim.api.nvim_win_get_number(props.win), group = 'DevIconWindows' },
           }
         end,
+        window = {
+          margin = {
+            vertical = { top = 0, bottom = 0 }, -- shift to overlap window borders
+            horizontal = { left = 0, right = 2 },
+          },
+          zindex = 100,
+        },
       }
     end,
     event = 'BufEnter',
