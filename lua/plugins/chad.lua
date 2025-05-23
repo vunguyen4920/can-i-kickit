@@ -2,6 +2,7 @@ return {
   {
     'nvchad/ui',
     lazy = false,
+    version = nil,
     dependencies = {
       'nvim-lua/plenary.nvim',
       { 'nvim-tree/nvim-web-devicons', lazy = true },
@@ -62,6 +63,7 @@ return {
   },
   {
     'nvchad/base46',
+    version = nil,
     build = function()
       require('base46').load_all_highlights()
     end,

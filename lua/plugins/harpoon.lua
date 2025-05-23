@@ -5,6 +5,33 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' },
     keys = function()
       local harpoon = require 'harpoon'
+
+      -- 4keys/8marks or 5keys/10marks etc.
+      local function harpoon_select_maps(keys)
+        local result = {}
+        for i = 1, #keys do
+          local key = keys:sub(i, i)
+
+          table.insert(result, {
+            '<C-' .. key .. '>',
+            function()
+              harpoon:list():select(i)
+            end,
+            desc = 'Harpoon Select ' .. i,
+          })
+
+          -- Control + Shift + key
+          table.insert(result, {
+            '<C-S-' .. key .. '>',
+            function()
+              harpoon:list():select(i + #keys)
+            end,
+            desc = 'Harpoon Select ' .. (i + #keys),
+          })
+        end
+        return result
+      end
+
       return {
         {
           '<leader>hm',
@@ -20,62 +47,7 @@ return {
           end,
           desc = 'Harpoon [Q]uick Menu',
         },
-        {
-          '<C-h>',
-          function()
-            harpoon:list():select(1)
-          end,
-          desc = 'Harpoon Select 1',
-        },
-        {
-          '<C-j>',
-          function()
-            harpoon:list():select(2)
-          end,
-          desc = 'Harpoon Select 2',
-        },
-        {
-          '<C-k>',
-          function()
-            harpoon:list():select(3)
-          end,
-          desc = 'Harpoon Select 3',
-        },
-        {
-          '<C-l>',
-          function()
-            harpoon:list():select(4)
-          end,
-          desc = 'Harpoon Select 4',
-        },
-        {
-          '<C-S-h>',
-          function()
-            harpoon:list():select(5)
-          end,
-          desc = 'Harpoon Select 5',
-        },
-        {
-          '<C-S-j>',
-          function()
-            harpoon:list():select(6)
-          end,
-          desc = 'Harpoon Select 6',
-        },
-        {
-          '<C-S-k>',
-          function()
-            harpoon:list():select(7)
-          end,
-          desc = 'Harpoon Select 7',
-        },
-        {
-          '<C-S-l>',
-          function()
-            harpoon:list():select(8)
-          end,
-          desc = 'Harpoon Select 8',
-        },
+        unpack(harpoon_select_maps 'hjkl;'),
       }
     end,
     opts = {},

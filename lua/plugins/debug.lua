@@ -129,80 +129,27 @@ return {
     end,
   },
   {
-    'chrisgrieser/nvim-chainsaw',
-    opts = {
-      marker = '🚀',
-    },
-    config = function(_, opts)
-      require('chainsaw').setup(opts)
-    end,
-    keys = function()
-      local chainsaw = require 'chainsaw'
+    'andrewferrier/debugprint.nvim',
+    cmd = { 'ResetDebugPrintsCounter' },
+    event = { 'BufReadPre' },
+    version = nil,
+    opts = function()
       return {
-        {
-          '<leader>cv',
-          function()
-            chainsaw.variableLog()
-          end,
-          desc = 'Chainsaw Variable Log',
+        keymaps = {
+          normal = {
+            delete_debug_prints = 'g?x',
+            toggle_comment_debug_prints = 'g?c',
+          },
         },
-        {
-          '<leader>co',
-          function()
-            chainsaw.objectLog()
-          end,
-          desc = 'Chainsaw Object Log',
-        },
-        {
-          '<leader>cs',
-          function()
-            chainsaw.stacktraceLog()
-          end,
-          desc = 'Chainsaw Stacktrace Log',
-        },
-        {
-          '<leader>cas',
-          function()
-            chainsaw.assertLog()
-          end,
-          desc = 'Chainsaw Assert Log',
-        },
-        {
-          '<leader>cm',
-          function()
-            chainsaw.messageLog()
-          end,
-          desc = 'Chainsaw Message Log',
-        },
-        {
-          '<leader>cb',
-          function()
-            chainsaw.beepLog()
-          end,
-          desc = 'Chainsaw Beep Log',
-        },
-        {
-          '<leader>ct',
-          function()
-            chainsaw.timeLog()
-          end,
-          desc = 'Chainsaw Time Log',
-        },
-        {
-          '<leader>cd',
-          function()
-            chainsaw.debugLog()
-          end,
-          desc = 'Chainsaw Debug Log',
-        },
-        {
-          '<leader>cr',
-          function()
-            chainsaw.removeLogs()
-          end,
-          desc = 'Chainsaw Remove Logs',
-        },
+        print_tag = ' 󰙥 Debug',
       }
     end,
+    keys = {
+      {
+        'g?rc',
+        '<cmd>ResetDebugPrintsCounter<CR>',
+        desc = 'Reset Debug Prints Counter',
+      },
+    },
   },
 }

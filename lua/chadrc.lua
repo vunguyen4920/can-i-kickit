@@ -49,14 +49,30 @@ M.base46 = {
       fg = 'yellow',
       bg = 'black',
     },
+    ModesCopy = {
+      bg = 'sun',
+    },
+    ModesDelete = {
+      bg = 'pink',
+    },
+    ModesInsert = {
+      bg = 'cyan',
+    },
+    ModesVisual = {
+      bg = 'purple',
+    },
+    DebugPrintLine = {
+      bg = 'one_bg',
+      italic = true,
+      bold = true,
+    },
   },
 }
 
 M.ui = {
   cmp = {
-    icons_left = false, -- only for non-atom styles!
-    style = 'default', -- default/flat_light/flat_dark/atom/atom_colored
-    abbr_maxwidth = 60,
+    icons_left = true, -- only for non-atom styles!
+    style = 'flat_dark', -- default/flat_light/flat_dark/atom/atom_colored
     -- for tailwind, css lsp etc
     format_colors = { lsp = true, icon = '󱓻' },
   },
