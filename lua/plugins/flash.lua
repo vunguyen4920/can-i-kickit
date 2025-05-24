@@ -30,7 +30,7 @@ return {
         },
         {
           mode = { 'n', 'x', 'o' },
-          '<M-s>',
+          'S',
           function()
             flash.treesitter()
           end,

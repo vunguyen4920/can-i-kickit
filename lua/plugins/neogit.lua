@@ -14,10 +14,18 @@ return {
       dofile(vim.g.base46_cache .. 'neogit')
     end,
     opts = {
-      graph_style = 'unicode',
+      graph_style = 'kitty',
       integrations = {
         diffview = true,
         telescope = true,
+      },
+      kind = 'floating',
+      floating = {
+        relative = 'editor',
+        width = 0.9,
+        height = 0.9,
+        style = 'minimal',
+        border = 'rounded',
       },
     },
     keys = function()

@@ -28,7 +28,7 @@ return {
         require('nvchad.tabufline').prev()
       end, { desc = 'buffer goto prev' })
 
-      map('n', '<leader>x', function()
+      map('n', '<leader>bc', function()
         require('nvchad.tabufline').close_buffer()
       end, { desc = 'buffer close' })
 
@@ -37,15 +37,15 @@ return {
       end, { desc = 'Telescope [T]heme [P]ick' })
 
       -- toggleable
-      map({ 'n', 't' }, '<A-v>', function()
+      map({ 'n', 't' }, '<leader>tv', function()
         require('nvchad.term').toggle { pos = 'vsp', id = 'vtoggleTerm' }
       end, { desc = 'terminal toggleable vertical term' })
 
-      map({ 'n', 't' }, '<A-S-H>', function()
+      map({ 'n', 't' }, '<leader>tt', function()
         require('nvchad.term').toggle { pos = 'sp', id = 'htoggleTerm' }
       end, { desc = 'terminal toggleable horizontal term' })
 
-      map({ 'n', 't' }, '<A-i>', function()
+      map({ 'n', 't' }, '<leader>tf', function()
         require('nvchad.term').toggle { pos = 'float', id = 'floatTerm' }
       end, { desc = 'terminal toggle floating term' })
 

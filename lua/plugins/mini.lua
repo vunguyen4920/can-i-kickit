@@ -44,7 +44,11 @@ return {
 
       local map_combo = require('mini.keymap').map_combo
       local mode = { 'i', 'c', 'x', 's' }
-      map_combo('i', 'kk', '<BS><BS><Esc>[s1z=gi<Right>') -- fix spelling
+      map_combo(mode, 'jk', '<BS><BS><Esc>')
+      map_combo(mode, 'kj', '<BS><BS><Esc>')
+      -- Escape into Normal mode from Terminal mode
+      map_combo('t', 'jk', '<BS><BS><C-\\><C-n>')
+      map_combo('t', 'kj', '<BS><BS><C-\\><C-n>')
 
       local map_multistep = require('mini.keymap').map_multistep
 

@@ -11,16 +11,6 @@ return {
     opts = { signs = false },
   },
   {
-    'max397574/better-escape.nvim',
-    event = 'InsertEnter',
-    opts = {},
-  },
-  {
-    'iamyoki/buffer-reopen.nvim',
-    event = 'BufEnter',
-    opts = {},
-  },
-  {
     'lewis6991/spaceless.nvim',
     opts = {},
     event = 'BufReadPost',

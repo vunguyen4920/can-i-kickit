@@ -51,42 +51,39 @@ return {
         additional_vim_regex_highlighting = { 'ruby' },
       },
       indent = { enable = true, disable = { 'ruby' } },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = 'gnn',
+          node_incremental = 'grn',
+          scope_incremental = 'grc',
+          node_decremental = 'grm',
+        },
+      },
     },
-    -- Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
   },
   {
     'nvim-treesitter/nvim-treesitter-textobjects',
-    dependencies = 'nvim-treesitter/nvim-treesitter',
     event = 'BufReadPost',
   },
   {
     'andersevenrud/nvim_context_vt',
     event = 'BufReadPre',
     opts = {},
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
   {
     'nvim-treesitter/nvim-treesitter-context',
+    event = 'BufReadPre',
     opts = {
       multiline_threshold = 1,
       max_lines = 3,
       min_window_height = 20,
-    },
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    event = 'BufReadPre',
-    keys = {
-      {
-        '<leader>tc',
-        '<cmd>TSContextToggle<CR>',
-        desc = 'Treesitter Context Toggle',
-      },
     },
   },
   {
     'davidmh/mdx.nvim',
     event = 'BufRead *.mdx',
     config = true,
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
   { 'fei6409/log-highlight.nvim', event = 'BufRead *.log', opts = {} },
 }
