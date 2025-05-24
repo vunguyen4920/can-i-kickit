@@ -141,7 +141,7 @@ return {
             toggle_comment_debug_prints = 'g?c',
           },
         },
-        print_tag = ' 󰙥 Debug',
+        print_tag = '🪲🔫 Debug',
       }
     end,
     keys = {
