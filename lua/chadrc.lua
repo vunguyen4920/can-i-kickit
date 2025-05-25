@@ -29,44 +29,6 @@ M.base46 = {
     'trouble',
     'vim-illuminate',
   },
-
-  hl_add = {
-    St_harpoon_active = {
-      fg = 'yellow',
-      bg = 'one_bg3',
-      bold = true,
-    },
-    St_harpoon_inactive = {
-      fg = 'white',
-      bg = 'one_bg',
-    },
-    St_harpoon_icon = {
-      fg = 'black',
-      bg = 'yellow',
-      bold = true,
-    },
-    St_harpoon_sep = {
-      fg = 'yellow',
-      bg = 'black',
-    },
-    ModesCopy = {
-      bg = 'sun',
-    },
-    ModesDelete = {
-      bg = 'pink',
-    },
-    ModesInsert = {
-      bg = 'cyan',
-    },
-    ModesVisual = {
-      bg = 'purple',
-    },
-    DebugPrintLine = {
-      bg = 'one_bg',
-      italic = true,
-      bold = true,
-    },
-  },
 }
 
 M.ui = {
