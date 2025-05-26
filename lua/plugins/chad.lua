@@ -28,7 +28,7 @@ return {
         require('nvchad.tabufline').prev()
       end, { desc = 'buffer goto prev' })
 
-      map('n', '<leader>bc', function()
+      map('n', '<C-c>', function()
         require('nvchad.tabufline').close_buffer()
       end, { desc = 'buffer close' })
 
