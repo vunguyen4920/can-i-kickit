@@ -196,6 +196,7 @@ return {
           },
         },
         astro = {},
+        biome = {},
         css_variables = {},
         cssls = {},
         cssmodules_ls = {},
@@ -271,6 +272,7 @@ return {
         'prettierd',
         'prettier',
         'eslint_d',
+        'biome',
 
         -- linters
         'markdownlint',
@@ -301,11 +303,5 @@ return {
       --   vim.lsp.enable(server)
       -- end
     end,
-  },
-  {
-    'zeioth/garbage-day.nvim',
-    dependencies = 'neovim/nvim-lspconfig',
-    event = 'LspAttach',
-    opts = {},
   },
 }

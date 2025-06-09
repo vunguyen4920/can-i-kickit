@@ -27,62 +27,100 @@ return {
         desc = '[F]ormat buffer',
       },
     },
-    opts = {
-      notify_on_error = false,
-      format_on_save = function(bufnr)
-        -- Disable "format_on_save lsp_fallback" for languages that don't
-        -- have a well standardized coding style. You can add additional
-        -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = true, cpp = true }
-        if disable_filetypes[vim.bo[bufnr].filetype] then
-          return nil
-        else
-          return {
-            timeout_ms = 500,
-            lsp_format = 'fallback',
-          }
-        end
-      end,
-      formatters_by_ft = {
-        css = { 'prettierd', 'prettier', stop_after_first = true },
-        scss = { 'prettierd', 'prettier', stop_after_first = true },
-        sass = { 'prettierd', 'prettier', stop_after_first = true },
-        graphql = function(bufnr)
-          return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
+    opts = function()
+      local conform = require 'conform'
+
+      return {
+        notify_on_error = false,
+        format_on_save = function(bufnr)
+          -- Disable "format_on_save lsp_fallback" for languages that don't
+          -- have a well standardized coding style. You can add additional
+          -- languages here or re-enable it for the disabled ones.
+          local disable_filetypes = { c = true, cpp = true }
+          if disable_filetypes[vim.bo[bufnr].filetype] then
+            return nil
+          else
+            return {
+              timeout_ms = 500,
+              lsp_format = 'fallback',
+            }
+          end
         end,
-        html = { 'prettierd', 'prettier', stop_after_first = true },
-        javascript = function(bufnr)
-          return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
-        end,
-        javascriptreact = function(bufnr)
-          return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
-        end,
-        json = function(bufnr)
-          return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
-        end,
-        jsonc = function(bufnr)
-          return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
-        end,
-        markdown = function(bufnr)
-          return { first(bufnr, 'prettierd', 'prettier'), 'markdownlint' }
-        end,
-        svelte = function(bufnr)
-          return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
-        end,
-        typescript = function(bufnr)
-          return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
-        end,
-        typescriptreact = function(bufnr)
-          return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
-        end,
-        vue = function(bufnr)
-          return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
-        end,
-        xml = { 'prettierd', 'prettier', stop_after_first = true },
-        yaml = { 'prettierd', 'prettier', stop_after_first = true },
-        lua = { 'stylua' },
-      },
-    },
+        formatters = {
+          prettier = { require_cwd = true },
+          prettierd = { require_cwd = true },
+          eslint_d = { require_cwd = true },
+          biome = { require_cwd = true },
+        },
+        formatters_by_ft = {
+          css = { 'biome', 'prettierd', 'prettier', stop_after_first = true },
+          scss = { 'biome', 'prettierd', 'prettier', stop_after_first = true },
+          sass = { 'biome', 'prettierd', 'prettier', stop_after_first = true },
+          graphql = function(bufnr)
+            if conform.get_formatter_info('biome', bufnr).available then
+              return { 'biome' }
+            end
+
+            return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
+          end,
+          html = { 'prettierd', 'prettier', stop_after_first = true },
+          javascript = function(bufnr)
+            if conform.get_formatter_info('biome', bufnr).available then
+              return { 'biome' }
+            end
+            return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
+          end,
+          javascriptreact = function(bufnr)
+            if conform.get_formatter_info('biome', bufnr).available then
+              return { 'biome' }
+            end
+            return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
+          end,
+          json = function(bufnr)
+            if conform.get_formatter_info('biome', bufnr).available then
+              return { 'biome' }
+            end
+            return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
+          end,
+          jsonc = function(bufnr)
+            if conform.get_formatter_info('biome', bufnr).available then
+              return { 'biome' }
+            end
+            return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
+          end,
+          markdown = function(bufnr)
+            return { first(bufnr, 'prettierd', 'prettier'), 'markdownlint' }
+          end,
+          svelte = function(bufnr)
+            if conform.get_formatter_info('biome', bufnr).available then
+              return { 'biome' }
+            end
+            return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
+          end,
+          typescript = function(bufnr)
+            if conform.get_formatter_info('biome', bufnr).available then
+              return { 'biome' }
+            end
+            return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
+          end,
+          typescriptreact = function(bufnr)
+            if conform.get_formatter_info('biome', bufnr).available then
+              return { 'biome' }
+            end
+            return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
+          end,
+          vue = function(bufnr)
+            if conform.get_formatter_info('biome', bufnr).available then
+              return { 'biome' }
+            end
+            return { first(bufnr, 'prettierd', 'prettier'), 'eslint_d' }
+          end,
+          xml = { 'prettierd', 'prettier', stop_after_first = true },
+          yaml = { 'prettierd', 'prettier', stop_after_first = true },
+          lua = { 'stylua' },
+        },
+      }
+    end,
     init = function()
       vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
