@@ -9,6 +9,7 @@
   "blink.compat": { "branch": "main", "commit": "2ed6d9a28b07fa6f3bface818470605f8896408c" },
   "cellular-automaton.nvim": { "branch": "main", "commit": "1606e9d5d04ff254023c3f3c62842d065708d6d3" },
   "codecompanion.nvim": { "branch": "main", "commit": "a5a8701bf8814ff0ba9bf5f76b3a3deedf3e5f28" },
+  "codesnap.nvim": { "branch": "main", "commit": "be6d6b9a3b5e6999edbda76b16dace03d9bfcd3d" },
   "conform.nvim": { "branch": "master", "commit": "6feb2f28f9a9385e401857b21eeac3c1b66dd628" },
   "copilot.lua": { "branch": "master", "commit": "a620a5a97b73faba009a8160bab2885316e1451c" },
   "debugprint.nvim": { "branch": "main", "commit": "7f2dcdd12db17d551641134bfd07cc395b0fccef" },
