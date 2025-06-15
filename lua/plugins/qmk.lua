@@ -1,3 +1,15 @@
+local SYMBOL_MAP = {
+  GUI = '⌘',
+  ALT = '⌥',
+  CTRL = '⌃',
+  SHIFT = '⇧',
+
+  G = '⌘',
+  A = '⌥',
+  C = '⌃',
+  S = '⇧',
+}
+
 return {
   {
     'codethread/qmk.nvim',
@@ -19,7 +31,6 @@ return {
           BT_NXT = '🛜🔼',
           BT_PRV = '🛜🔽',
           BT_CLR = '🛜❌',
-          BT_SEL = '🛜',
           C_MUTE = '🔇',
           C_VOL_DN = '🔉',
           C_VOL_UP = '🔊',
@@ -34,14 +45,6 @@ return {
           HYPER = 'HYPER',
           TAB = '⇥',
           RET = '⏎',
-          RSHIFT = '⇧',
-          LSHIFT = '⇧',
-          LG = '⌘',
-          RG = '⌘',
-          LC = '⌃',
-          RC = '⌃',
-          LA = '⌥',
-          RA = '⌥',
           ['COPY'] = '📄',
           ['PASTE'] = '📋',
           ['CUT'] = '✂️',
@@ -49,8 +52,6 @@ return {
           BSPC = '⌫',
           DEL = '⌦',
           ESC = '⎋',
-          LALT = '⌥',
-          RALT = '⌥',
           -- use MENU as compose key
           K_CMENU = '🌍',
           K_MENU = '🌍',
@@ -74,14 +75,6 @@ return {
           MB5 = '🖱️F5',
           MOVE_X = '🖱️↔️', -- or 'X' or '➡️⬅️'
           MOVE_Y = '🖱️↕️', -- or 'Y' or '⬆️⬇️'
-          MOUSE_MOVE_GEAR1_VAL = '1',
-          MOUSE_MOVE_GEAR2_VAL = '2',
-          MOUSE_MOVE_GEAR3_VAL = '3',
-          MOUSE_MOVE_GEAR4_VAL = '4',
-          MOUSE_SCROLL_GEAR1_VAL = '1',
-          MOUSE_SCROLL_GEAR2_VAL = '2',
-          MOUSE_SCROLL_GEAR3_VAL = '3',
-          MOUSE_SCROLL_GEAR4_VAL = '4',
         },
       },
       layout = {
@@ -99,9 +92,9 @@ return {
         for _, k in ipairs(keymap) do
           mapped[k.key] = k.value
         end
-        for _, v in ipairs { 'GUI', 'ALT', 'CTRL', 'SHIFT' } do
-          mapped['R' .. v] = 'R' .. v
-          mapped['L' .. v] = 'L' .. v
+        for _, v in ipairs { 'GUI', 'ALT', 'CTRL', 'SHIFT', 'G', 'A', 'C', 'S' } do
+          mapped['R' .. v] = SYMBOL_MAP[v]
+          mapped['L' .. v] = SYMBOL_MAP[v]
         end
         return function(key)
           local parts = vim.split(key, ' ')
