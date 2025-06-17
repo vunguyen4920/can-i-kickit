@@ -45,6 +45,11 @@ return {
           HYPER = 'HYPER',
           TAB = '⇥',
           RET = '⏎',
+          ['LC(TAB)'] = '⌃⇥',
+          ['LC(LALT)'] = '⌃⌥',
+          ['LG(TAB)'] = '⌘⇥',
+          ['LG(W)'] = '⌘W',
+          ['LC(W)'] = '⌃W',
           ['COPY'] = '📄',
           ['PASTE'] = '📋',
           ['CUT'] = '✂️',
@@ -73,8 +78,14 @@ return {
           MB3 = '🖱️M',
           MB4 = '🖱️B4',
           MB5 = '🖱️F5',
-          MOVE_X = '🖱️↔️', -- or 'X' or '➡️⬅️'
-          MOVE_Y = '🖱️↕️', -- or 'Y' or '⬆️⬇️'
+          MOVE_LEFT = '🖱️←',
+          MOVE_RIGHT = '🖱️→',
+          MOVE_UP = '🖱️↑',
+          MOVE_DOWN = '🖱️📜↓',
+          SCRL_LEFT = '🖱️📜←',
+          SCRL_RIGHT = '🖱️📜→',
+          SCRL_UP = '🖱️📜↑',
+          SCRL_DOWN = '🖱️📜↓',
         },
       },
       layout = {
