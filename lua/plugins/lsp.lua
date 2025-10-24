@@ -163,8 +163,7 @@ return {
         },
       }
 
-      local vue_typescript_plugin =
-        vim.fn.expand('$MASON/packages/vue-language-server/' .. '/node_modules/@vue/language-server' .. '/node_modules/@vue/typescript-plugin')
+      local vue_language_server_path = vim.fn.expand('$MASON/packages' .. '/vue-language-server/' .. '/node_modules/@vue/language-server')
 
       --  Available keys are:
       --  - cmd (table): Override the default command used to start the server
@@ -232,18 +231,17 @@ return {
             plugins = {
               {
                 name = '@vue/typescript-plugin',
-                location = vue_typescript_plugin,
-                languages = { 'javascript', 'typescript', 'vue' },
+                location = vue_language_server_path,
+                languages = { 'vue' },
+                configNamespace = 'typescript',
               },
             },
           },
           filetypes = {
+            'typescript',
             'javascript',
             'javascriptreact',
-            'javascript.jsx',
-            'typescript',
             'typescriptreact',
-            'typescript.tsx',
             'vue',
           },
         },
