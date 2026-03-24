@@ -19,7 +19,7 @@ return {
         diffview = true,
         telescope = true,
       },
-      kind = 'floating',
+      kind = 'tab',
       floating = {
         relative = 'editor',
         width = 0.9,
@@ -27,6 +27,8 @@ return {
         style = 'minimal',
         border = 'rounded',
       },
+      disable_line_numbers = false,
+      disable_relative_line_numbers = false,
     },
     keys = function()
       local neogit = require 'neogit'
