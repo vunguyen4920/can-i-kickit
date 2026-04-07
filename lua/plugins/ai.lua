@@ -1,11 +1,8 @@
--- TODO: Update on this
 return {
   {
     'folke/sidekick.nvim',
     lazy = false,
     opts = {
-      -- add any options here
-      picker = 'snacks',
       cli = {
         mux = {
           enabled = true,
@@ -30,11 +27,6 @@ return {
         function() require('sidekick.cli').focus() end,
         desc = 'Sidekick Focus',
         mode = { 'n', 't', 'i', 'x' },
-      },
-      {
-        '<leader>aa',
-        function() require('sidekick.cli').toggle() end,
-        desc = 'Sidekick Toggle CLI',
       },
       {
         '<leader>as',

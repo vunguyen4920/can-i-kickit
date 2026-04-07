@@ -2,9 +2,7 @@ return {
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
-    init = function()
-      dofile(vim.g.base46_cache .. 'whichkey')
-    end,
+    init = function() dofile(vim.g.base46_cache .. 'whichkey') end,
     opts = {
       delay = 0,
       icons = {
@@ -43,9 +41,11 @@ return {
 
       -- Document existing key chains
       spec = {
-        { '<leader>s', group = '[S]earch' },
+        { '<leader>s', group = '[S]earch', mode = { 'n', 'v' } },
         { '<leader>t', group = '[T]oggle' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        { '<M-t>', group = '[T]rouble', mode = { 'n', 'v' } },
+        { 'gr', group = 'LSP Actions', mode = { 'n' } },
       },
     },
   },

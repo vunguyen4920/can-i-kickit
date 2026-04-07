@@ -2,20 +2,18 @@ return {
   {
     'folke/trouble.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    init = function()
-      dofile(vim.g.base46_cache .. 'trouble')
-    end,
+    init = function() dofile(vim.g.base46_cache .. 'trouble') end,
     opts = {},
     keys = {
       {
-        '<leader>td',
+        '<M-t><M-t>',
         '<cmd>Trouble diagnostics toggle<cr>',
-        desc = 'Trouble Diagnostics Open',
+        desc = '[T]rouble Diagnostics Open',
       },
       {
-        '<leader>tbd',
+        '<M-t><space>',
         '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
-        desc = 'Trouble Diagnostics Current Buf Open',
+        desc = '[T]rouble Diagnostics Current Buf Open',
       },
     },
   },

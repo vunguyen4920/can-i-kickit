@@ -13,19 +13,15 @@ return {
           local key = keys:sub(i, i)
 
           table.insert(result, {
-            '<C-' .. key .. '>',
-            function()
-              harpoon:list():select(i)
-            end,
+            '<M-' .. key .. '>',
+            function() harpoon:list():select(i) end,
             desc = 'Harpoon Select ' .. i,
           })
 
           -- Control + Shift + key
           table.insert(result, {
-            '<C-S-' .. key .. '>',
-            function()
-              harpoon:list():select(i + #keys)
-            end,
+            '<C-M-' .. key .. '>',
+            function() harpoon:list():select(i + #keys) end,
             desc = 'Harpoon Select ' .. (i + #keys),
           })
         end
@@ -35,19 +31,15 @@ return {
       return {
         {
           '<leader>hm',
-          function()
-            harpoon:list():add()
-          end,
+          function() harpoon:list():add() end,
           desc = 'Harpoon [M]ark',
         },
         {
           '<leader>hq',
-          function()
-            harpoon.ui:toggle_quick_menu(harpoon:list())
-          end,
+          function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
           desc = 'Harpoon [Q]uick Menu',
         },
-        unpack(harpoon_select_maps 'hjkl;'),
+        unpack(harpoon_select_maps 'xcvsdfwerzaq'), -- 12 marks, 123456789 10 11 12
       }
     end,
     opts = {},

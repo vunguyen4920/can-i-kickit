@@ -3,10 +3,8 @@ return {
     'NeogitOrg/neogit',
     dependencies = {
       'nvim-lua/plenary.nvim', -- required
-      'sindrets/diffview.nvim', -- optional - Diff integration
-
-      -- Only one of these is needed, not both.
-      'nvim-telescope/telescope.nvim', -- optional
+      'esmuellert/codediff.nvim', -- optional - Diff integration
+      'folke/snacks.nvim',
     },
     init = function()
       dofile(vim.g.base46_cache .. 'git')
@@ -16,8 +14,8 @@ return {
     opts = {
       graph_style = 'kitty',
       integrations = {
-        diffview = true,
-        telescope = true,
+        codediff = true,
+        snacks = true,
       },
       kind = 'tab',
       floating = {

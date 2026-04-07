@@ -12,58 +12,42 @@ return {
     keys = {
       {
         '<F5>',
-        function()
-          require('dap').continue()
-        end,
+        function() require('dap').continue() end,
         desc = 'Debug: Start/Continue',
       },
       {
         '<F1>',
-        function()
-          require('dap').step_into()
-        end,
+        function() require('dap').step_into() end,
         desc = 'Debug: Step Into',
       },
       {
         '<F2>',
-        function()
-          require('dap').step_over()
-        end,
+        function() require('dap').step_over() end,
         desc = 'Debug: Step Over',
       },
       {
         '<F3>',
-        function()
-          require('dap').step_out()
-        end,
+        function() require('dap').step_out() end,
         desc = 'Debug: Step Out',
       },
       {
         '<leader>b',
-        function()
-          require('dap').toggle_breakpoint()
-        end,
+        function() require('dap').toggle_breakpoint() end,
         desc = 'Debug: Toggle Breakpoint',
       },
       {
         '<leader>B',
-        function()
-          require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ')
-        end,
+        function() require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ') end,
         desc = 'Debug: Set Breakpoint',
       },
       -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
       {
         '<F7>',
-        function()
-          require('dapui').toggle()
-        end,
+        function() require('dapui').toggle() end,
         desc = 'Debug: See last session result.',
       },
     },
-    init = function()
-      dofile(vim.g.base46_cache .. 'dap')
-    end,
+    init = function() dofile(vim.g.base46_cache .. 'dap') end,
     config = function()
       local dap = require 'dap'
       local dapui = require 'dapui'
@@ -133,6 +117,7 @@ return {
     cmd = { 'ResetDebugPrintsCounter' },
     event = { 'BufReadPre' },
     version = nil,
+    dependencies = { 'folke/snacks.nvim' },
     opts = function()
       return {
         keymaps = {
@@ -149,6 +134,11 @@ return {
         'g?rc',
         '<cmd>ResetDebugPrintsCounter<CR>',
         desc = 'Reset Debug Prints Counter',
+      },
+      {
+        'g?ss',
+        '<cmd>Debugprint search<CR>',
+        desc = 'Search Debug Prints',
       },
     },
   },

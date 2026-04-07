@@ -10,7 +10,6 @@ M.base46 = {
     'blink',
     'dap',
     'devicons',
-    'diffview',
     'flash',
     'git',
     'git-conflict',
@@ -22,7 +21,6 @@ M.base46 = {
     'semantic_tokens',
     'syntax',
     'tbline',
-    'telescope',
     'tiny-inline-diagnostic',
     'todo',
     'treesitter',
@@ -46,18 +44,14 @@ M.ui = {
     modules = {
       harpoon_marks = function()
         local harpoon = require 'harpoon'
-        if not harpoon or not harpoon.list or not harpoon:list().items then
-          return ''
-        end
+        if not harpoon or not harpoon.list or not harpoon:list().items then return '' end
 
         local marks = harpoon:list().items
         local stbuf = vim.api.nvim_win_get_buf(vim.g.statusline_winid or 0)
         local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(stbuf), ':.')
         local icon = '󰛢'
 
-        if #marks == 0 then
-          return ''
-        end
+        if #marks == 0 then return '' end
 
         local label = ''
 
@@ -74,10 +68,6 @@ M.ui = {
         return '%#St_harpoon_sep#' .. sep_l .. '%#St_harpoon_icon#' .. icon .. ' ' .. label .. sep_r
       end,
     },
-  },
-
-  telescope = {
-    style = 'bordered',
   },
 
   tabufline = {
