@@ -134,7 +134,9 @@ return {
           },
         },
       },
-      gitbrowse = {},
+      gitbrowse = {
+        what = 'commit',
+      },
       image = { doc = { inline = false } },
       indent = { chunk = { enabled = true } },
       input = {},

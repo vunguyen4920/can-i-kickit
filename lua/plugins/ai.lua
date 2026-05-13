@@ -65,4 +65,43 @@ return {
       },
     },
   },
+  {
+    'milanglacier/minuet-ai.nvim',
+    enabled = true,
+    event = 'BufReadPre',
+    opts = {
+      provider = 'codestral',
+      notify = 'debug',
+      n_completions = 1,
+      add_single_line_entry = false,
+      virtualtext = {
+        auto_trigger_ft = {
+          'lua',
+          'javascript',
+          'typescript',
+          'javascriptreact',
+          'typescriptreact',
+          'vue',
+          'svelte',
+        },
+        auto_trigger_ignore_ft = { 'oil', 'codecompanion' },
+        keymap = {
+          accept = '<Tab>', -- Accept whole completion
+          accept_line = '<A-a>', -- Accept one line
+          accept_n_lines = '<A-z>', -- Accept n lines (prompts for number)
+          prev = '<A-[>', -- Cycle to previous completion item
+          next = '<A-]>', -- Cycle to next completion item
+          dismiss = '<A-e>', -- Dismiss virtual text
+        },
+      },
+      provider_options = {
+        codestral = {
+          optional = {
+            max_tokens = 256,
+            stop = { '\n\n' },
+          },
+        },
+      },
+    },
+  },
 }
