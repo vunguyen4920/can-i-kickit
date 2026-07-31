@@ -2,9 +2,7 @@ local function find_nearest_node_modules_dir()
   -- current buffer dir
   local current_dir = vim.fn.expand '%:p:h'
   while current_dir ~= '/' do
-    if vim.fn.isdirectory(current_dir .. '/node_modules') == 1 then
-      return current_dir
-    end
+    if vim.fn.isdirectory(current_dir .. '/node_modules') == 1 then return current_dir end
     current_dir = vim.fn.fnamemodify(current_dir, ':h')
   end
   return nil
@@ -17,7 +15,7 @@ return {
     config = function()
       local lint = require 'lint'
       lint.linters_by_ft = {
-        markdown = { 'markdownlint' },
+        markdown = { 'markdownlint-cli2' },
         lua = { 'selene' },
         luau = { 'selene' },
         javascript = { 'eslint_d' },
@@ -42,9 +40,7 @@ return {
           end
           local original_cwd = vim.fn.getcwd()
           local node_modules_dir = find_nearest_node_modules_dir()
-          if node_modules_dir then
-            vim.cmd('cd ' .. node_modules_dir)
-          end
+          if node_modules_dir then vim.cmd('cd ' .. node_modules_dir) end
           lint.try_lint()
           vim.cmd('cd ' .. original_cwd)
         end,

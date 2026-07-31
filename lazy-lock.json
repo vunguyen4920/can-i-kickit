@@ -10,6 +10,7 @@
   "conform.nvim": { "branch": "master", "commit": "dca1a190aa85f9065979ef35802fb77131911106" },
   "debugprint.nvim": { "branch": "main", "commit": "54c74749fb299bafbae818f775243be776663420" },
   "dial.nvim": { "branch": "master", "commit": "f2634758455cfa52a8acea6f142dcd6271a1bf57" },
+  "ecolog2.nvim": { "branch": "main", "commit": "8edc7ed79cd6542379a86227bce2839785c91ccf" },
   "fidget.nvim": { "branch": "main", "commit": "889e2e96edef4e144965571d46f7a77bcc4d0ddf" },
   "flash.nvim": { "branch": "main", "commit": "fcea7ff883235d9024dc41e638f164a450c14ca2" },
   "friendly-snippets": { "branch": "main", "commit": "6cd7280adead7f586db6fccbd15d2cac7e2188b9" },

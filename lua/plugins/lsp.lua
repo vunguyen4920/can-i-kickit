@@ -267,7 +267,7 @@ return {
         'biome',
 
         -- linters
-        'markdownlint',
+        'markdownlint-cli2',
         'selene',
       })
 

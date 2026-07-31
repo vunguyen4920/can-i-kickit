@@ -45,53 +45,61 @@ return {
         formatters = {
           prettier = { require_cwd = true },
           eslint_d = { require_cwd = true },
-          biome = { require_cwd = true },
+          ['biome-check'] = { require_cwd = true },
         },
         formatters_by_ft = {
-          css = { 'prettier', stop_after_first = true },
-          scss = { 'prettier', stop_after_first = true },
-          sass = { 'prettier', stop_after_first = true },
+          css = { 'biome-check', 'prettier', stop_after_first = true },
+          scss = { 'biome-check', 'prettier', stop_after_first = true },
+          sass = { 'biome-check', 'prettier', stop_after_first = true },
           graphql = function(bufnr)
-            if conform.get_formatter_info('biome', bufnr).available then return { 'biome' } end
+            if conform.get_formatter_info('biome-check', bufnr).available then return { 'biome-check' } end
 
             return { first(bufnr, 'prettier'), 'eslint_d' }
           end,
           html = { 'prettier', stop_after_first = true },
           javascript = function(bufnr)
-            if conform.get_formatter_info('biome', bufnr).available then return { 'biome' } end
+            if conform.get_formatter_info('biome-check', bufnr).available then return { 'biome-check' } end
             return { first(bufnr, 'prettier'), 'eslint_d' }
           end,
           javascriptreact = function(bufnr)
-            if conform.get_formatter_info('biome', bufnr).available then return { 'biome' } end
+            if conform.get_formatter_info('biome-check', bufnr).available then return { 'biome-check' } end
             return { first(bufnr, 'prettier'), 'eslint_d' }
           end,
           json = function(bufnr)
-            if conform.get_formatter_info('biome', bufnr).available then return { 'biome' } end
+            if conform.get_formatter_info('biome-check', bufnr).available then return { 'biome-check' } end
             return { first(bufnr, 'prettier'), 'eslint_d' }
           end,
           jsonc = function(bufnr)
-            if conform.get_formatter_info('biome', bufnr).available then return { 'biome' } end
+            if conform.get_formatter_info('biome-check', bufnr).available then return { 'biome-check' } end
             return { first(bufnr, 'prettier'), 'eslint_d' }
           end,
-          markdown = function(bufnr) return { first(bufnr, 'prettier'), 'markdownlint' } end,
+          markdown = function(bufnr) return { first(bufnr, 'prettier'), 'markdownlint-cli2' } end,
           svelte = function(bufnr)
-            if conform.get_formatter_info('biome', bufnr).available then return { 'biome' } end
+            if conform.get_formatter_info('biome-check', bufnr).available then return { 'biome-check' } end
             return { first(bufnr, 'prettier'), 'eslint_d' }
           end,
           typescript = function(bufnr)
-            if conform.get_formatter_info('biome', bufnr).available then return { 'biome' } end
+            if conform.get_formatter_info('biome-check', bufnr).available then return { 'biome-check' } end
             return { first(bufnr, 'prettier'), 'eslint_d' }
           end,
           typescriptreact = function(bufnr)
-            if conform.get_formatter_info('biome', bufnr).available then return { 'biome' } end
+            if conform.get_formatter_info('biome-check', bufnr).available then return { 'biome-check' } end
             return { first(bufnr, 'prettier'), 'eslint_d' }
           end,
           vue = function(bufnr)
-            if conform.get_formatter_info('biome', bufnr).available then return { 'biome' } end
+            if conform.get_formatter_info('biome-check', bufnr).available then return { 'biome-check' } end
+            return { first(bufnr, 'prettier'), 'eslint_d' }
+          end,
+          astro = function(bufnr)
+            if conform.get_formatter_info('biome-check', bufnr).available then return { 'biome-check' } end
             return { first(bufnr, 'prettier'), 'eslint_d' }
           end,
           xml = { 'prettier', stop_after_first = true },
           yaml = { 'prettier', stop_after_first = true },
+          svg = function(bufnr)
+            if conform.get_formatter_info('biome-check', bufnr).available then return { 'biome-check' } end
+            return { first(bufnr, 'prettier'), 'eslint_d' }
+          end,
           lua = { 'stylua' },
         },
       }
