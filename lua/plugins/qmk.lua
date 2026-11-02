@@ -42,6 +42,7 @@ return {
           C_PREV = '⏮',
           C_PP = '⏯',
           EP_TOG = '🔌',
+          ['GAME'] = '🎮',
           AMPS = '&',
           STAR = '*',
           LPAR = '(',
@@ -125,15 +126,11 @@ return {
         end
         return function(key)
           local parts = vim.split(key, ' ')
-          if vim.tbl_contains({ '&kp', '&bt', '&ext_power', '&msc', '&mmv', '&mkp' }, parts[1]) then
-            table.remove(parts, 1)
-          end
+          if vim.tbl_contains({ '&kp', '&bt', '&ext_power', '&msc', '&mmv', '&mkp' }, parts[1]) then table.remove(parts, 1) end
           for i, part in ipairs(parts) do
             part = mapped[part] or mapped['KC_' .. part] or part
             part = part:gsub('^N(%d)$', '%1')
-            if part:find '&' ~= 1 then
-              part = part:upper()
-            end
+            if part:find '&' ~= 1 then part = part:upper() end
             parts[i] = part
           end
           return table.concat(parts, ' ')
