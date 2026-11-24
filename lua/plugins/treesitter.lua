@@ -124,10 +124,6 @@ return {
       min_window_height = 20,
     },
   },
-  {
-    'davidmh/mdx.nvim',
-    event = 'BufRead *.mdx',
-    config = true,
-  },
+  { 'davidmh/mdx.nvim', event = 'BufRead *.mdx', opts = {} },
   { 'fei6409/log-highlight.nvim', event = 'BufRead *.log', opts = {} },
 }
